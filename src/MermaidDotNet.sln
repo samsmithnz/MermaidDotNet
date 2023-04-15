@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet.Tests", "MermaidDotNet.Tests\MermaidDotNet.Tests.csproj", "{ADA8DF70-1BFD-45C6-8F28-061899BD8457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet", "MermaidDotNet\MermaidDotNet.csproj", "{24E70061-A966-44D3-BB36-3F3AB402E469}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADA8DF70-1BFD-45C6-8F28-061899BD8457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA8DF70-1BFD-45C6-8F28-061899BD8457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA8DF70-1BFD-45C6-8F28-061899BD8457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA8DF70-1BFD-45C6-8F28-061899BD8457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E70061-A966-44D3-BB36-3F3AB402E469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E70061-A966-44D3-BB36-3F3AB402E469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E70061-A966-44D3-BB36-3F3AB402E469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E70061-A966-44D3-BB36-3F3AB402E469}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

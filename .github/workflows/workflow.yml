@@ -1,0 +1,43 @@
+name: CI/CD
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    name: Build job
+    runs-on: windows-latest
+    outputs:
+      Version: ${{ steps.gitversion.outputs.SemVer }}
+      CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.15
+      with:
+        versionSpec: 5.x
+    - name: Determine Version
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.15
+    - name: Display GitVersion outputs
+      run: |
+        echo "Version: ${{ steps.gitversion.outputs.SemVer }}"
+        echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}"
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: .NET test
+      run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release
+    - name: .NET publish
+      run: dotnet publish src/MermaidDotNet/MermaidDotNet.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+    - name: Upload package back to GitHub
+      uses: actions/upload-artifact@v3
+      with:
+        name: drop
+        path: src/MermaidDotNet/bin/Release
