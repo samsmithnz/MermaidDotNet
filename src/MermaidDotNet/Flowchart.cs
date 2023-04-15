@@ -1,4 +1,6 @@
-﻿namespace MermaidDotNet;
+﻿using System.Text;
+
+namespace MermaidDotNet;
 public class Flowchart
 {
     public string Direction { get; set; }
@@ -17,7 +19,10 @@ public class Flowchart
 
     public string CalculateFlowchart()
     {
-        return "";
+        StringBuilder sb = new();
+        sb.Append("flowchart " + Direction);
+
+        return sb.ToString();
     }
 
 }

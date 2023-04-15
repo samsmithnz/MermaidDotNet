@@ -28,7 +28,7 @@ public class FlowchartTests
     }
 
     [TestMethod]
-    public void ValidNoDirectionFlowchart()
+    public void InvalidNoDirectionFlowchart()
     {
         //Arrange
         try
