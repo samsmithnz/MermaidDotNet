@@ -1,4 +1,4 @@
-﻿namespace MermaidDotNet
+﻿namespace MermaidDotNet.Models
 {
     public class Link
     {
