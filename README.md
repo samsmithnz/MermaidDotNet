@@ -20,6 +20,15 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
 ```
 
 The mermaid result is:
+
+```
+flowchart LR
+    node1[This is node 1]
+    node2[This is node 2]
+    node1--link text!-->node2
+```
+
+Which when rendered in mermaid, looks like this:
 ```mermaid  
 flowchart LR
     node1[This is node 1]
