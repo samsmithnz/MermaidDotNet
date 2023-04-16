@@ -4,7 +4,6 @@
 Very simple example, to create a Left->Right graph (LR), with two nodes linked. 
 ```csharp
     string direction = "LR";
-    Flowchart flowchart = new(direction);
     List<Node> nodes = new()
     {
         new("node1", "This is node 1"),
@@ -14,7 +13,8 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
     {
         new Link("node1", "node2", "link text!")
     };
-    string result = flowchart.CalculateFlowchart(nodes, links);
+    Flowchart flowchart = new(direction, nodes, links);
+    string result = flowchart.CalculateFlowchart();
 ```
 
 The mermaid result is:
