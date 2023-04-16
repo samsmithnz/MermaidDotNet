@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
     - build
-    #if: github.ref == 'refs/heads/main'      
+    if: github.ref == 'refs/heads/main'      
     steps:
     - name: Display GitVersion outputs
       run: |
@@ -60,14 +60,14 @@ jobs:
       uses: actions/download-artifact@v3
     - name: Create Release
       uses: ncipollo/release-action@v1
-      if: false #needs.build.outputs.CommitsSinceVersionSource > 0 #Only create a release if there has been a commit/version change
+      if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only create a release if there has been a commit/version change
       with:
         #artifacts: Linux_x64/RepoAutomation.Linux_x64.${{ needs.build.outputs.Version }}.zip,MacOS_x64/RepoAutomation.MacOS_x64.${{ needs.versionAndTest.outputs.Version }}.zip,Windows_x64/RepoAutomation.Windows_x64.${{ needs.versionAndTest.outputs.Version }}.zip
         tag: ${{ needs.build.outputs.Version }}
         name: Release ${{ needs.build.outputs.Version }}
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
     - name: Publish nuget package to nuget.org
-      if: true # && needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
+      if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
       run: dotnet nuget push drop\*.nupkg --api-key "${{ secrets.NuGetToken }}" --source "https://api.nuget.org/v3/index.json"
       shell: pwsh
       
