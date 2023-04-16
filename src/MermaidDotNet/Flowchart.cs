@@ -42,6 +42,7 @@ public class Flowchart
         {
             Node? sourceNode = nodes.Where(n => n.Name == link.SourceNode).FirstOrDefault();
             Node? destinationNode = nodes.Where(n => n.Name == link.DestinationNode).FirstOrDefault();
+            sb.Append("    ");
             if (sourceNode != null)
             {
                 sb.Append(sourceNode.Name);
