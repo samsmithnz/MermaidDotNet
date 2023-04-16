@@ -11,7 +11,8 @@ public class FlowchartCalculationTests
         //Arrange
         string direction = "LR";
         Flowchart flowchart = new(direction);
-        string expected = "flowchart " + direction;
+        string expected = @"flowchart LR
+";
 
         //Act
         string result = flowchart.CalculateFlowchart(new(), new());
