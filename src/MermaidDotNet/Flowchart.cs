@@ -37,20 +37,33 @@ public class Flowchart
         //    sb.Append(Environment.NewLine);
         //    //miner1["Miner Mk1<br>(Iron Ore)"]--"Iron Ore<br>(60 units/min)"--> smeltor1
         //}
-
+        foreach (Node node in nodes)
+        {
+            sb.Append("    ");
+            sb.Append(node.Name);
+            sb.Append("[");
+            sb.Append(node.Text);
+            sb.Append("]");
+            sb.Append(Environment.NewLine);
+        }
         foreach (Link link in links)
         {
             Node? sourceNode = nodes.Where(n => n.Name == link.SourceNode).FirstOrDefault();
             Node? destinationNode = nodes.Where(n => n.Name == link.DestinationNode).FirstOrDefault();
-            sb.Append("    ");
-            if (sourceNode != null)
+            if (sourceNode == null || destinationNode == null)
             {
-                sb.Append(sourceNode.Name);
-                sb.Append("[");
-                sb.Append(sourceNode.Text);
-                sb.Append("]");
+                throw new Exception("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
             }
 
+            sb.Append("    ");
+            //if (sourceNode != null)
+            //{
+            //    sb.Append(sourceNode.Name);
+            //    sb.Append("[");
+            //    sb.Append(sourceNode.Text);
+            //    sb.Append("]");
+            //}
+            sb.Append(sourceNode.Name);
             sb.Append("--");
             if (string.IsNullOrEmpty(link.Text) == false)
             {
@@ -58,11 +71,12 @@ public class Flowchart
                 sb.Append("--");
             }
             sb.Append(">");
+            sb.Append(destinationNode.Name);
 
-            if (destinationNode != null)
-            {
-                sb.Append(destinationNode.Name);
-            }
+            //if (destinationNode != null)
+            //{
+            //    sb.Append(destinationNode.Name);
+            //}
             sb.Append(Environment.NewLine);
         }
         return sb.ToString();
