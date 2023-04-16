@@ -6,8 +6,10 @@ namespace MermaidDotNet;
 public class Flowchart
 {
     public string Direction { get; set; }
+    public List<Node> Nodes { get; set; }
+    public List<Link> Links { get; set; }
 
-    public Flowchart(string direction)
+    public Flowchart(string direction, List<Node> nodes, List<Link> links)
     {
         if (direction != "LR" && direction != "TD")
         {
@@ -17,9 +19,11 @@ public class Flowchart
         {
             Direction = direction;
         }
+        Nodes = nodes;
+        Links = links;
     }
 
-    public string CalculateFlowchart(List<Node> nodes, List<Link> links)
+    public string CalculateFlowchart()
     {
         StringBuilder sb = new();
         sb.Append("flowchart " + Direction + Environment.NewLine);
@@ -37,7 +41,7 @@ public class Flowchart
         //    sb.Append(Environment.NewLine);
         //    //miner1["Miner Mk1<br>(Iron Ore)"]--"Iron Ore<br>(60 units/min)"--> smeltor1
         //}
-        foreach (Node node in nodes)
+        foreach (Node node in Nodes)
         {
             sb.Append("    ");
             sb.Append(node.Name);
@@ -46,10 +50,10 @@ public class Flowchart
             sb.Append("]");
             sb.Append(Environment.NewLine);
         }
-        foreach (Link link in links)
+        foreach (Link link in Links)
         {
-            Node? sourceNode = nodes.Where(n => n.Name == link.SourceNode).FirstOrDefault();
-            Node? destinationNode = nodes.Where(n => n.Name == link.DestinationNode).FirstOrDefault();
+            Node? sourceNode = Nodes.Where(n => n.Name == link.SourceNode).FirstOrDefault();
+            Node? destinationNode = Nodes.Where(n => n.Name == link.DestinationNode).FirstOrDefault();
             if (sourceNode == null || destinationNode == null)
             {
                 throw new Exception("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
