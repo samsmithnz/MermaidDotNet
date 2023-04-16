@@ -12,11 +12,11 @@ public class FlowchartCalculationTests
         string expected = "flowchart " + direction;
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateFlowchart(new(), new());
 
         //Assert
         Assert.IsNotNull(flowchart);
-        Assert.IsNotNull(result); 
+        Assert.IsNotNull(result);
         Assert.AreEqual(expected, result);
     }
 
