@@ -84,7 +84,7 @@ public class FlowchartCalculationTests
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", null)
+            new Link("node1", "node2", "")
         };
         Flowchart flowchart = new(direction, nodes, links);
         string expected = @"flowchart LR
