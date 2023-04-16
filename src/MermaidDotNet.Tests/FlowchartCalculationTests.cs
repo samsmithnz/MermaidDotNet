@@ -1,4 +1,5 @@
 using MermaidDotNet.Models;
+using System.Xml.Linq;
 
 namespace MermaidDotNet.Tests;
 
@@ -10,12 +11,12 @@ public class FlowchartCalculationTests
     {
         //Arrange
         string direction = "LR";
-        Flowchart flowchart = new(direction);
+        Flowchart flowchart = new(direction, new(), new());
         string expected = @"flowchart LR
 ";
 
         //Act
-        string result = flowchart.CalculateFlowchart(new(), new());
+        string result = flowchart.CalculateFlowchart();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -28,17 +29,17 @@ public class FlowchartCalculationTests
     {
         //Arrange
         string direction = "LR";
-        Flowchart flowchart = new(direction);
         List<Node> nodes = new()
         {
             new("node1", "This is node 1")
         };
+        Flowchart flowchart = new(direction, nodes, new());
         string expected = @"flowchart LR
     node1[This is node 1]
 ";
 
         //Act
-        string result = flowchart.CalculateFlowchart(nodes, new());
+        string result = flowchart.CalculateFlowchart();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -51,19 +52,19 @@ public class FlowchartCalculationTests
     {
         //Arrange
         string direction = "LR";
-        Flowchart flowchart = new(direction);
         List<Node> nodes = new()
         {
             new("node1", "This is node 1"),
             new("node2", "This is node 2")
         };
+        Flowchart flowchart = new(direction, nodes, new());
         string expected = @"flowchart LR
     node1[This is node 1]
     node2[This is node 2]
 ";
 
         //Act
-        string result = flowchart.CalculateFlowchart(nodes, new());
+        string result = flowchart.CalculateFlowchart();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -76,7 +77,6 @@ public class FlowchartCalculationTests
     {
         //Arrange
         string direction = "LR";
-        Flowchart flowchart = new(direction);
         List<Node> nodes = new()
         {
             new("node1", "This is node 1"),
@@ -86,6 +86,7 @@ public class FlowchartCalculationTests
         {
             new Link("node1", "node2", null)
         };
+        Flowchart flowchart = new(direction, nodes, links);
         string expected = @"flowchart LR
     node1[This is node 1]
     node2[This is node 2]
@@ -93,7 +94,7 @@ public class FlowchartCalculationTests
 ";
 
         //Act
-        string result = flowchart.CalculateFlowchart(nodes, links);
+        string result = flowchart.CalculateFlowchart();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -106,7 +107,6 @@ public class FlowchartCalculationTests
     {
         //Arrange
         string direction = "LR";
-        Flowchart flowchart = new(direction);
         List<Node> nodes = new()
         {
             new("node1", "This is node 1"),
@@ -116,6 +116,7 @@ public class FlowchartCalculationTests
         {
             new Link("node1", "node2", "link text!")
         };
+        Flowchart flowchart = new(direction, nodes, links);
         string expected = @"flowchart LR
     node1[This is node 1]
     node2[This is node 2]
@@ -123,7 +124,7 @@ public class FlowchartCalculationTests
 ";
 
         //Act
-        string result = flowchart.CalculateFlowchart(nodes, links);
+        string result = flowchart.CalculateFlowchart();
 
         //Assert
         Assert.IsNotNull(flowchart);

@@ -7,7 +7,7 @@ public class FlowchartTests
     public void ValidTDFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("TD");
+        Flowchart flowchart = new("TD", new(), new());
 
         //Act
 
@@ -19,7 +19,7 @@ public class FlowchartTests
     public void ValidLRFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("LR");
+        Flowchart flowchart = new("LR", new(), new());
 
         //Act
 
@@ -33,7 +33,7 @@ public class FlowchartTests
         //Arrange
         try
         {
-            Flowchart flowchart = new("none");
+            Flowchart flowchart = new("none", new(), new());
 
             //Act
 
@@ -42,7 +42,7 @@ public class FlowchartTests
         }
         catch (Exception ex)
         {
-            Assert.AreEqual("Direction none is currently unsupported",ex.Message  );
+            Assert.AreEqual("Direction none is currently unsupported", ex.Message);
         }
     }
 }
