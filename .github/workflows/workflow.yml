@@ -34,13 +34,16 @@ jobs:
         dotnet-version: 7.0.x
     - name: .NET test
       run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release
-    - name: .NET publish
-      run: dotnet publish src/MermaidDotNet/MermaidDotNet.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+    #- name: .NET publish
+    #  run: dotnet publish src/MermaidDotNet/MermaidDotNet.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+    - name: .NET pack
+      run: dotnet pack src/MermaidDotNet/MermaidDotNet.csproj -c Release --nologo -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
         name: drop
         path: src/MermaidDotNet/bin/Release
+
 
 
   Release:
@@ -65,6 +68,6 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
     - name: Publish nuget package to nuget.org
       if: false # && needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push nugetPackage\*.nupkg --api-key "${{ secrets.GHPackagesToken }}" --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push drop\*.nupkg --api-key "${{ secrets.GHPackagesToken }}" --source "https://api.nuget.org/v3/index.json"
       shell: pwsh
       
