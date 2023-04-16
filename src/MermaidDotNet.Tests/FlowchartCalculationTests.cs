@@ -46,7 +46,7 @@ public class FlowchartCalculationTests
     }
 
     [TestMethod]
-    public void TwoNodesAndLinkFlowchart()
+    public void TwoNodesFlowchart()
     {
         //Arrange
         string direction = "LR";
@@ -57,11 +57,68 @@ public class FlowchartCalculationTests
             new("node2", "This is node 2")
         };
         string expected = @"flowchart LR 
-    node1[This is node 1] --> node2[This is node 2]
+    node1[This is node 1]
+    node2[This is node 2]
 ";
 
         //Act
         string result = flowchart.CalculateFlowchart(nodes, new());
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void TwoNodesAndLinkFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        Flowchart flowchart = new(direction);
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1"),
+            new("node2", "This is node 2")
+        };
+        List<Link> links = new()
+        {
+            new Link("node1", "node2", null)
+        };
+        string expected = @"flowchart LR 
+    node1[This is node 1] --> node2[This is node 2]
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart(nodes, links);
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void TwoNodesAndLinkTextFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        Flowchart flowchart = new(direction);
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1"),
+            new("node2", "This is node 2")
+        };
+        List<Link> links = new()
+        {
+            new Link("node1", "node2", "link text!")
+        };
+        string expected = @"flowchart LR 
+    node1[This is node 1] --link text!--> node2[This is node 2]
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart(nodes, links);
 
         //Assert
         Assert.IsNotNull(flowchart);
