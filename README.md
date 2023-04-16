@@ -1,5 +1,7 @@
 # MermaidDotNet
 [![CI/CD](https://github.com/samsmithnz/MermaidDotNet/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/MermaidDotNet/actions/workflows/workflow.yml)
+[![Latest NuGet package](https://img.shields.io/nuget/v/MermaidDotNet)](https://www.nuget.org/packages/MermaidDotNet/)
+[![Current Release](https://img.shields.io/github/release/samsmithnz/MermaidDotNet/all.svg)](https://github.com/samsmithnz/MermaidDotNet/releases)
 
 Create flowcharts with .NET, and then render the Mermaid code that can then be inserted into markdown or directly displayed in HTML with mermaid.js
 
