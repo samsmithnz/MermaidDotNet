@@ -33,7 +33,7 @@ public class FlowchartCalculationTests
         {
             new("node1", "This is node 1")
         };
-        string expected = @"flowchart LR 
+        string expected = @"flowchart LR
     node1[This is node 1]
 ";
 
@@ -57,7 +57,7 @@ public class FlowchartCalculationTests
             new("node1", "This is node 1"),
             new("node2", "This is node 2")
         };
-        string expected = @"flowchart LR 
+        string expected = @"flowchart LR
     node1[This is node 1]
     node2[This is node 2]
 ";
@@ -86,7 +86,7 @@ public class FlowchartCalculationTests
         {
             new Link("node1", "node2", null)
         };
-        string expected = @"flowchart LR 
+        string expected = @"flowchart LR
     node1[This is node 1]
     node2[This is node 2]
     node1-->node2
@@ -116,7 +116,7 @@ public class FlowchartCalculationTests
         {
             new Link("node1", "node2", "link text!")
         };
-        string expected = @"flowchart LR 
+        string expected = @"flowchart LR
     node1[This is node 1]
     node2[This is node 2]
     node1--link text!-->node2
