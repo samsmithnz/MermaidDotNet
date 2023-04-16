@@ -87,7 +87,7 @@ public class FlowchartCalculationTests
             new Link("node1", "node2", null)
         };
         string expected = @"flowchart LR 
-    node1[This is node 1] --> node2[This is node 2]
+    node1[This is node 1]-->node2[This is node 2]
 ";
 
         //Act
@@ -115,7 +115,7 @@ public class FlowchartCalculationTests
             new Link("node1", "node2", "link text!")
         };
         string expected = @"flowchart LR 
-    node1[This is node 1] --link text!--> node2[This is node 2]
+    node1[This is node 1]--link text!-->node2[This is node 2]
 ";
 
         //Act
