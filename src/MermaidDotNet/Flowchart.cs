@@ -63,4 +63,15 @@ public class Flowchart
         return sb.ToString();
     }
 
+    private static string OpenShape()
+    {
+        if (Shape)
+        return "";
+    }
+
+    private static string CloseShape()
+    {
+        return "";
+    }
+
 }
