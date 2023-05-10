@@ -1,8 +1,8 @@
 ﻿using MermaidDotNet.Models;
 using System.Text;
-using System.Xml.Linq;
 
 namespace MermaidDotNet;
+
 public class Flowchart
 {
     public string Direction { get; set; }
@@ -27,20 +27,8 @@ public class Flowchart
     {
         StringBuilder sb = new();
         sb.Append("flowchart " + Direction + Environment.NewLine);
-        //foreach (Node node in nodes)
-        //{
-        //    sb.Append(node.Name);
-        //    sb.Append("[");
-        //    sb.Append(node.Text);
-        //    sb.Append("]");
-        //    if (links.Where(p => p.SourceNode == node.Name).FirstOrDefault() != null)
-        //    {
 
-        //    }
-
-        //    sb.Append(Environment.NewLine);
-        //    //miner1["Miner Mk1<br>(Iron Ore)"]--"Iron Ore<br>(60 units/min)"--> smeltor1
-        //}
+        //Add nodes
         foreach (Node node in Nodes)
         {
             sb.Append("    ");
@@ -50,6 +38,8 @@ public class Flowchart
             sb.Append("]");
             sb.Append(Environment.NewLine);
         }
+
+        //Add links
         foreach (Link link in Links)
         {
             Node? sourceNode = Nodes.Where(n => n.Name == link.SourceNode).FirstOrDefault();
@@ -58,15 +48,7 @@ public class Flowchart
             {
                 throw new Exception("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
             }
-
             sb.Append("    ");
-            //if (sourceNode != null)
-            //{
-            //    sb.Append(sourceNode.Name);
-            //    sb.Append("[");
-            //    sb.Append(sourceNode.Text);
-            //    sb.Append("]");
-            //}
             sb.Append(sourceNode.Name);
             sb.Append("--");
             if (string.IsNullOrEmpty(link.Text) == false)
@@ -76,11 +58,6 @@ public class Flowchart
             }
             sb.Append(">");
             sb.Append(destinationNode.Name);
-
-            //if (destinationNode != null)
-            //{
-            //    sb.Append(destinationNode.Name);
-            //}
             sb.Append(Environment.NewLine);
         }
         return sb.ToString();
