@@ -2,7 +2,7 @@
 {
     public class Node
     {
-        public Node(string name, string text, string shape = "")
+        public Node(string name, string text, eShape shape = eShape.Rectangle)
         {
             Name = name;
             Text = text;
@@ -13,6 +13,17 @@
         public string Name { get; set; }
         public string Text { get; set; }
         public List<Node> Dependencies { get; set; }
-        public string Shape { get; set; }
+        public eShape Shape { get; set; }
+
+        public enum eShape
+        {
+            Rectangle,
+            Rounded,
+            Stadium,
+            Cylinder,
+            Circle,
+            Rhombus,
+            Hexagon
+        }
     }
 }
