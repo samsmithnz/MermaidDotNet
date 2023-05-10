@@ -33,9 +33,9 @@ public class Flowchart
         {
             sb.Append("    ");
             sb.Append(node.Name);
-            sb.Append("[");
+            sb.Append(node.OpenShape());
             sb.Append(node.Text);
-            sb.Append("]");
+            sb.Append(node.CloseShape());
             sb.Append(Environment.NewLine);
         }
 
@@ -61,17 +61,6 @@ public class Flowchart
             sb.Append(Environment.NewLine);
         }
         return sb.ToString();
-    }
-
-    private static string OpenShape()
-    {
-        if (Shape)
-        return "";
-    }
-
-    private static string CloseShape()
-    {
-        return "";
     }
 
 }
