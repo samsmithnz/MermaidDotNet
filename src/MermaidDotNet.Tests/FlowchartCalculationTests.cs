@@ -73,6 +73,31 @@ public class FlowchartCalculationTests
     }
 
     [TestMethod]
+    public void TwoNodesRoundedNodesFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1", Node.eShape.Rounded),
+            new("node2", "This is node 2", Node.eShape.Rounded)
+        };
+        Flowchart flowchart = new(direction, nodes, new());
+        string expected = @"flowchart LR
+    node1[This is node 1]
+    node2[This is node 2]
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
     public void TwoNodesAndLinkFlowchart()
     {
         //Arrange
