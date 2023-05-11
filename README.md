@@ -12,7 +12,7 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
     {
         new("node1", "This is node 1"),
         new("node2", "This is node 2"),
-        new("node3", "This is node 3")
+        new("node3", "This is node 3", Node.eShape.Rounded)
     };
     List<Link> links = new()
     {
@@ -29,7 +29,7 @@ The mermaid result is:
 flowchart LR
     node1[This is node 1]
     node2[This is node 2]
-    node3[This is node 3]
+    node3(This is node 3)
     node1--12s-->node2
     node1--3mins-->node3
 ```
@@ -39,7 +39,7 @@ Which when rendered in mermaid, looks like this:
 flowchart LR
     node1[This is node 1]
     node2[This is node 2]
-    node3[This is node 3]
+    node3(This is node 3)
     node1--12s-->node2
     node1--3mins-->node3
 ```
