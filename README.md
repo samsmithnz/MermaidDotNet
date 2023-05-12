@@ -23,9 +23,9 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
     string result = flowchart.CalculateFlowchart();
 ```
 
-The mermaid result is:
+The mermaid result is below - which can be inserted into markdown in GitHub.com
 
-```
+```mermaid
 flowchart LR
     node1[This is node 1]
     node2{{This is node 2}}
@@ -43,3 +43,23 @@ flowchart LR
     node1--12s-->node2
     node1--3mins-->node3
 ```
+
+It's also possible to insert into HTML and rendor on the web. Here is a sample, referencing the mermaid.js CDN.
+
+```html
+<h2>Production Graph</h2>
+<body>
+    Here is a mermaid diagram:
+    <pre class="mermaid">
+flowchart LR
+    node1[This is node 1]
+    node2{{This is node 2}}
+    node3(This is node 3)
+    node1--12s-->node2
+    node1--3mins-->node3
+    </pre>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
