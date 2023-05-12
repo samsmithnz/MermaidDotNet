@@ -25,7 +25,7 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
 
 The mermaid result is below - which can be inserted into markdown in GitHub.com
 
-```mermaid
+```
 flowchart LR
     node1[This is node 1]
     node2{{This is node 2}}
