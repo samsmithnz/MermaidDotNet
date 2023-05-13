@@ -23,7 +23,7 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
     string result = flowchart.CalculateFlowchart();
 ```
 
-The mermaid result is below - which can be inserted into markdown in GitHub.com
+The mermaid result is below - which can be inserted into markdown in GitHub ([blog announcement](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/))
 
 ```
 flowchart LR

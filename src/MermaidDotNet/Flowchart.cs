@@ -9,6 +9,12 @@ public class Flowchart
     public List<Node> Nodes { get; set; }
     public List<Link> Links { get; set; }
 
+    /// <summary>
+    /// Initialize the flowchart
+    /// </summary>
+    /// <param name="direction">Currently accepts LR and TR options</param>
+    /// <param name="nodes">A list of nodes</param>
+    /// <param name="links">A list of links</param>
     public Flowchart(string direction, List<Node> nodes, List<Link> links)
     {
         if (direction != "LR" && direction != "TD")
@@ -23,6 +29,10 @@ public class Flowchart
         Links = links;
     }
 
+    /// <summary>
+    /// Given a list of nodes and links, calculate the mermaid flowchart
+    /// </summary>
+    /// <returns>a mermaid graph as a string</returns>
     public string CalculateFlowchart()
     {
         StringBuilder sb = new();
