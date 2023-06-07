@@ -79,8 +79,8 @@ public class FlowchartCalculationTests
         string direction = "LR";
         List<Node> nodes = new()
         {
-            new("node1", "This is node 1", Node.ShapeEnum.Rounded),
-            new("node2", "This is node 2", Node.ShapeEnum.Rounded)
+            new("node1", "This is node 1", Node.ShapeType.Rounded),
+            new("node2", "This is node 2", Node.ShapeType.Rounded)
         };
         Flowchart flowchart = new(direction, nodes, new());
         string expected = @"flowchart LR

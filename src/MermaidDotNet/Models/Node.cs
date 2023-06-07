@@ -2,7 +2,7 @@
 {
     public class Node
     {
-        public Node(string name, string text, ShapeEnum shape = ShapeEnum.Rectangle)
+        public Node(string name, string text, ShapeType shape = ShapeType.Rectangle)
         {
             Name = name;
             Text = text;
@@ -13,9 +13,9 @@
         public string Name { get; set; }
         public string Text { get; set; }
         public List<Node> Dependencies { get; set; }
-        public ShapeEnum Shape { get; set; }
+        public ShapeType Shape { get; set; }
 
-        public enum ShapeEnum
+        public enum ShapeType
         {
             Rectangle,
             Rounded,
@@ -30,19 +30,19 @@
         {
             switch (Shape)
             {
-                case ShapeEnum.Rectangle:
+                case ShapeType.Rectangle:
                     return "[";
-                case ShapeEnum.Rounded:
+                case ShapeType.Rounded:
                     return "(";
-                case ShapeEnum.Stadium:
+                case ShapeType.Stadium:
                     return "([";
-                case ShapeEnum.Cylinder:
+                case ShapeType.Cylinder:
                     return "[(";
-                case ShapeEnum.Circle:
+                case ShapeType.Circle:
                     return "((";
-                case ShapeEnum.Rhombus:
+                case ShapeType.Rhombus:
                     return "{";
-                case ShapeEnum.Hexagon:
+                case ShapeType.Hexagon:
                     return "{{";
                 default: // Rectangle is default
                     return "[";
@@ -53,19 +53,19 @@
         {
             switch (Shape)
             {
-                case ShapeEnum.Rectangle:
+                case ShapeType.Rectangle:
                     return "]";
-                case ShapeEnum.Rounded:
+                case ShapeType.Rounded:
                     return ")";
-                case ShapeEnum.Stadium:
+                case ShapeType.Stadium:
                     return "])";
-                case ShapeEnum.Cylinder:
+                case ShapeType.Cylinder:
                     return ")]";
-                case ShapeEnum.Circle:
+                case ShapeType.Circle:
                     return "))";
-                case ShapeEnum.Rhombus:
+                case ShapeType.Rhombus:
                     return "}";
-                case ShapeEnum.Hexagon:
+                case ShapeType.Hexagon:
                     return "}}";
                 default: // Rectangle is default
                     return "]";
