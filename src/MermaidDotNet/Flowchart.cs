@@ -19,7 +19,7 @@ public class Flowchart
     {
         if (direction != "LR" && direction != "TD")
         {
-            throw new Exception("Direction " + direction + " is currently unsupported");
+            throw new NotSupportedException("Direction " + direction + " is currently unsupported");
         }
         else
         {
@@ -52,21 +52,21 @@ public class Flowchart
         //Add links
         foreach (Link link in Links)
         {
-            Node? sourceNode = Nodes.Where(n => n.Name == link.SourceNode).FirstOrDefault();
-            Node? destinationNode = Nodes.Where(n => n.Name == link.DestinationNode).FirstOrDefault();
+            Node? sourceNode = Nodes.FirstOrDefault(n => n.Name == link.SourceNode);
+            Node? destinationNode = Nodes.FirstOrDefault(n => n.Name == link.DestinationNode);
             if (sourceNode == null || destinationNode == null)
             {
-                throw new Exception("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
+                throw new ArgumentException("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
             }
             sb.Append("    ");
             sb.Append(sourceNode.Name);
             sb.Append("--");
-            if (string.IsNullOrEmpty(link.Text) == false)
+            if (!string.IsNullOrEmpty(link.Text))
             {
                 sb.Append(link.Text);
                 sb.Append("--");
             }
-            sb.Append(">");
+            sb.Append('>');
             sb.Append(destinationNode.Name);
             sb.Append(Environment.NewLine);
         }

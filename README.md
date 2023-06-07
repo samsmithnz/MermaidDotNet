@@ -11,8 +11,8 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
     List<Node> nodes = new()
     {
         new("node1", "This is node 1"),
-        new("node2", "This is node 2", Node.eShape.Hexagon),
-        new("node3", "This is node 3", Node.eShape.Rounded)
+        new("node2", "This is node 2", Node.ShapeEnum.Hexagon),
+        new("node3", "This is node 3", Node.ShapeEnum.Rounded)
     };
     List<Link> links = new()
     {
