@@ -66,7 +66,7 @@ public class Flowchart
                 sb.Append(link.Text);
                 sb.Append("--");
             }
-            sb.Append(">");
+            sb.Append('>');
             sb.Append(destinationNode.Name);
             sb.Append(Environment.NewLine);
         }
