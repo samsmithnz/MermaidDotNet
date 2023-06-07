@@ -43,13 +43,28 @@ jobs:
       with:
         name: drop
         path: src/MermaidDotNet/bin/Release
-
+        
+        
+  sonarCloud:
+    name: Run SonarCloud analysis
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' 
+    steps:
+      - name: Run Sonarcloud test
+        uses: samsmithnz/SamsDotNetSonarCloudAction@1.2.0
+        with:
+          projects: 'src/MermaidDotNet/MermaidDotNet.csproj,src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj'
+          dotnet-version: '7.0.x'
+          sonarcloud-organization: samsmithnz-github
+          sonarcloud-project: samsmithnz_MermaidDotNet
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
   Release:
     runs-on: ubuntu-latest
     needs: 
     - build
+    - sonarCloud
     if: github.ref == 'refs/heads/main'      
     steps:
     - name: Display GitVersion outputs
