@@ -30,19 +30,19 @@
         {
             switch (Shape)
             {
-                case Shape.Rectangle:
+                case ShapeType.Rectangle:
                     return "[";
-                case Shape.Rounded:
+                case ShapeType.Rounded:
                     return "(";
-                case Shape.Stadium:
+                case ShapeType.Stadium:
                     return "([";
-                case Shape.Cylinder:
+                case ShapeType.Cylinder:
                     return "[(";
-                case Shape.Circle:
+                case ShapeType.Circle:
                     return "((";
-                case Shape.Rhombus:
+                case ShapeType.Rhombus:
                     return "{";
-                case Shape.Hexagon:
+                case ShapeType.Hexagon:
                     return "{{";
                 default: // Rectangle is default
                     return "[";
@@ -53,19 +53,19 @@
         {
             switch (Shape)
             {
-                case Shape.Rectangle:
+                case ShapeType.Rectangle:
                     return "]";
-                case Shape.Rounded:
+                case ShapeType.Rounded:
                     return ")";
-                case Shape.Stadium:
+                case ShapeType.Stadium:
                     return "])";
-                case Shape.Cylinder:
+                case ShapeType.Cylinder:
                     return ")]";
-                case Shape.Circle:
+                case ShapeType.Circle:
                     return "))";
-                case Shape.Rhombus:
+                case ShapeType.Rhombus:
                     return "}";
-                case Shape.Hexagon:
+                case ShapeType.Hexagon:
                     return "}}";
                 default: // Rectangle is default
                     return "]";
