@@ -52,8 +52,8 @@ public class Flowchart
         //Add links
         foreach (Link link in Links)
         {
-            Node? sourceNode = Nodes.FirstOrDefault(n => n.Name == link.SourceNode);
-            Node? destinationNode = Nodes.FirstOrDefault(n => n.Name == link.DestinationNode);
+            Node? sourceNode = Nodes.Find(n => n.Name == link.SourceNode);
+            Node? destinationNode = Nodes.Find(n => n.Name == link.DestinationNode);
             if (sourceNode == null || destinationNode == null)
             {
                 throw new ArgumentException("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");

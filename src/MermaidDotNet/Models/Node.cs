@@ -2,7 +2,7 @@
 {
     public class Node
     {
-        public Node(string name, string text, ShapeType shape = Shape.Rectangle)
+        public Node(string name, string text, ShapeType shape = ShapeType.Rectangle)
         {
             Name = name;
             Text = text;
