@@ -61,7 +61,7 @@ public class Flowchart
             sb.Append("    ");
             sb.Append(sourceNode.Name);
             sb.Append("--");
-            if (string.IsNullOrEmpty(link.Text) == false)
+            if (!string.IsNullOrEmpty(link.Text))
             {
                 sb.Append(link.Text);
                 sb.Append("--");
