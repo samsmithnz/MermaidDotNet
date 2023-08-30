@@ -78,8 +78,8 @@ jobs:
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only create a release if there has been a commit/version change
       with:
         #artifacts: Linux_x64/RepoAutomation.Linux_x64.${{ needs.build.outputs.Version }}.zip,MacOS_x64/RepoAutomation.MacOS_x64.${{ needs.versionAndTest.outputs.Version }}.zip,Windows_x64/RepoAutomation.Windows_x64.${{ needs.versionAndTest.outputs.Version }}.zip
-        tag: ${{ needs.build.outputs.Version }}
-        name: Release ${{ needs.build.outputs.Version }}
+        tag: "v${{ needs.build.outputs.Version }}"
+        name: "v${{ needs.build.outputs.Version }}"
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
     - name: Publish nuget package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
