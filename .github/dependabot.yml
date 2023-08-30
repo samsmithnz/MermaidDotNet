@@ -9,6 +9,10 @@ updates:
   assignees:
   - samsmithnz
   open-pull-requests-limit: 10
+  groups:
+    tests:
+      patterns: ["*"]
+      update-types: ["minor", "patch"]
 - package-ecosystem: nuget
   directory: /src/MermaidDotNet/
   schedule:
@@ -18,6 +22,10 @@ updates:
   assignees:
   - samsmithnz
   open-pull-requests-limit: 10
+  groups:
+    core:
+      patterns: ["*"]
+      update-types: ["minor", "patch"]
 - package-ecosystem: github-actions
   directory: /
   schedule:
@@ -27,3 +35,7 @@ updates:
   assignees:
   - samsmithnz
   open-pull-requests-limit: 10
+  groups:
+    actions:
+      patterns: ["*"]
+      update-types: ["minor", "patch"]
