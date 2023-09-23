@@ -59,7 +59,7 @@ public class Flowchart
                     sb.Append(AddLink(link));
                 }
                 sb.Append("    ");
-                sb.Append("end ");
+                sb.Append("end");
                 sb.Append(Environment.NewLine);
             }
         }
