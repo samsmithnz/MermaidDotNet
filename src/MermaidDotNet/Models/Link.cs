@@ -2,7 +2,7 @@
 {
     public class Link
     {
-        public Link(string sourceNode, string destinationNode, string text)
+        public Link(string sourceNode, string destinationNode, string? text = null)
         {
             SourceNode = sourceNode;
             DestinationNode = destinationNode;
@@ -11,6 +11,6 @@
 
         public string SourceNode { get; set; }
         public string DestinationNode { get; set; }
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 }

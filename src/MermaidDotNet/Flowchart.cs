@@ -46,6 +46,8 @@ public class Flowchart
         {
             foreach (SubGraph subGroup in SubGraphs)
             {
+                Nodes.AddRange(subGroup.Nodes);
+                Links.AddRange(subGroup.Links);
                 sb.Append("    ");
                 sb.Append("subgraph ");
                 sb.Append(subGroup.Name);
