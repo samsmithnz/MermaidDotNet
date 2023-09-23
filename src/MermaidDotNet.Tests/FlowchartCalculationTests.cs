@@ -191,5 +191,37 @@ public class FlowchartCalculationTests
         Assert.AreEqual(expected, result);
     }
 
+    [TestMethod]
+    public void TwoNodesInASubGraphFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<SubGraph> subGraphs = new()
+        {
+            new("graph1", 
+                new List<Node>
+                {
+                    new("node1", "This is node 1"),
+                    new("node2", "This is node 2")
+                }, 
+                new())
+        };
+        Flowchart flowchart = new(direction, new(), new(), subGraphs);
+        string expected = @"flowchart LR
+    subgraph graph1
+    node1[This is node 1]
+    node2[This is node 2]
+    end
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
 
 }
