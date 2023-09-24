@@ -8,11 +8,11 @@
 
         public SubGraph(string name)
         {
-            Name = name;
+            Name = name.Replace(" ", "");
         }
         public SubGraph(string name, List<Node> nodes, List<Link> links)
         {
-            Name = name;
+            Name = name.Replace(" ", "");
             Nodes = nodes;
             Links = links;
         }   

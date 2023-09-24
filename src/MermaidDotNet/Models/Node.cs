@@ -4,7 +4,7 @@
     {
         public Node(string name, string text, ShapeType shape = ShapeType.Rectangle)
         {
-            Name = name;
+            Name = name.Replace(" ","");
             Text = text;
             Dependencies = new();
             Shape = shape;
