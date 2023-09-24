@@ -4,8 +4,8 @@
     {
         public Link(string sourceNode, string destinationNode, string? text = null)
         {
-            SourceNode = sourceNode;
-            DestinationNode = destinationNode;
+            SourceNode = sourceNode.Replace(" ", "");
+            DestinationNode = destinationNode.Replace(" ", "");
             Text = text;
         }
 
