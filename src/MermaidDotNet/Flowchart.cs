@@ -10,6 +10,7 @@ public class Flowchart
     public List<Node> Nodes { get; set; }
     public List<Link> Links { get; set; }
     public List<SubGraph>? SubGraphs { get; set; }
+    public List<Node> NavigationNodes { get; set; }
 
     /// <summary>
     /// Initialize the flowchart
@@ -30,6 +31,11 @@ public class Flowchart
         Nodes = nodes;
         Links = links;
         SubGraphs = subGraphs;
+        NavigationNodes = new();
+        foreach (Node node in Nodes)
+        {
+            NavigationNodes.Add(node);
+        }
     }
 
     /// <summary>
@@ -46,8 +52,7 @@ public class Flowchart
         {
             foreach (SubGraph subGroup in SubGraphs)
             {
-                Nodes.AddRange(subGroup.Nodes);
-                Links.AddRange(subGroup.Links);
+                NavigationNodes.AddRange(subGroup.Nodes);
                 sb.Append("    ");
                 sb.Append("subgraph ");
                 sb.Append(subGroup.Name);
@@ -95,8 +100,8 @@ public class Flowchart
     private string AddLink(Link link)
     {
         StringBuilder sb = new();
-        Node? sourceNode = Nodes.Find(n => n.Name == link.SourceNode);
-        Node? destinationNode = Nodes.Find(n => n.Name == link.DestinationNode);
+        Node? sourceNode = NavigationNodes.Find(n => n.Name == link.SourceNode);
+        Node? destinationNode = NavigationNodes.Find(n => n.Name == link.DestinationNode);
         if (sourceNode == null || destinationNode == null)
         {
             throw new ArgumentException("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
