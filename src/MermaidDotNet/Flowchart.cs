@@ -36,6 +36,16 @@ public class Flowchart
         {
             NavigationNodes.Add(node);
         }
+        if (SubGraphs != null)
+        {
+            foreach (SubGraph subGraph in SubGraphs)
+            {
+                foreach (Node node in subGraph.Nodes)
+                {
+                    NavigationNodes.Add(node);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -52,7 +62,6 @@ public class Flowchart
         {
             foreach (SubGraph subGroup in SubGraphs)
             {
-                NavigationNodes.AddRange(subGroup.Nodes);
                 sb.Append("    ");
                 sb.Append("subgraph ");
                 sb.Append(subGroup.Name);
