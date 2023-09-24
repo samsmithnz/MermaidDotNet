@@ -66,6 +66,7 @@ public class Flowchart
                 sb.Append("subgraph ");
                 if (subGroup.Direction != null)
                 {
+                    sb.Append(Environment.NewLine);
                     sb.Append("direction ");
                     sb.Append(subGroup.Direction);
                     sb.Append(Environment.NewLine);
