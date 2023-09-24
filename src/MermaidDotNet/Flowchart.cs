@@ -64,15 +64,15 @@ public class Flowchart
             {
                 sb.Append("    ");
                 sb.Append("subgraph ");
+                sb.Append(subGroup.Name);
+                sb.Append(Environment.NewLine);
                 if (subGroup.Direction != null)
                 {
-                    sb.Append(Environment.NewLine);
+                    sb.Append("    ");
                     sb.Append("direction ");
                     sb.Append(subGroup.Direction);
                     sb.Append(Environment.NewLine);
                 }
-                sb.Append(subGroup.Name);
-                sb.Append(Environment.NewLine);
                 foreach (Node node in subGroup.Nodes)
                 {
                     sb.Append(AddNode(node));
