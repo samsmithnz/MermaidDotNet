@@ -191,5 +191,141 @@ public class FlowchartCalculationTests
         Assert.AreEqual(expected, result);
     }
 
+    [TestMethod]
+    public void TwoNodesInASubGraphFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<SubGraph> subGraphs = new()
+        {
+            new("graph1",
+                new List<Node>
+                {
+                    new("node1", "This is node 1"),
+                    new("node2", "This is node 2")
+                },
+                new())
+        };
+        Flowchart flowchart = new(direction, new(), new(), subGraphs);
+        string expected = @"flowchart LR
+    subgraph graph1
+    node1[This is node 1]
+    node2[This is node 2]
+    end
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void FourNodesInTwoSubGraphsFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<SubGraph> subGraphs = new()
+        {
+            new("graph1",
+                new List<Node>
+                {
+                    new("node1", "This is node 1"),
+                    new("node2", "This is node 2")
+                },
+                new()),
+            new("graph2",
+                new List<Node>
+                {
+                    new("node3", "This is node 3"),
+                    new("node4", "This is node 4")
+                },
+                new List<Link> {
+                    new Link("node1", "node3", null)
+                })
+        };
+        Flowchart flowchart = new(direction, new(), new(), subGraphs);
+        string expected = @"flowchart LR
+    subgraph graph1
+    node1[This is node 1]
+    node2[This is node 2]
+    end
+    subgraph graph2
+    node3[This is node 3]
+    node4[This is node 4]
+    node1-->node3
+    end
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void FourNodesInTwoSubGraphsAndTwoSingleNodesFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<Node> nodes = new()
+        {
+            new("node5", "This is node 5"),
+            new("node6", "This is node 6"),
+        };
+        List<Link> links = new()
+        {
+            new Link("node5", "node6")
+        };
+        List<SubGraph> subGraphs = new()
+        {
+            new("graph1",
+                new List<Node>
+                {
+                    new("node1", "This is node 1"),
+                    new("node2", "This is node 2")
+                },
+                new()),
+            new("graph2",
+                new List<Node>
+                {
+                    new("node3", "This is node 3"),
+                    new("node4", "This is node 4")
+                },
+                new List<Link> {
+                    new Link("node1", "node3", null)
+                })
+        };
+        Flowchart flowchart = new(direction, nodes, links, subGraphs);
+        string expected = @"flowchart LR
+    subgraph graph1
+    node1[This is node 1]
+    node2[This is node 2]
+    end
+    subgraph graph2
+    node3[This is node 3]
+    node4[This is node 4]
+    node1-->node3
+    end
+    node5[This is node 5]
+    node6[This is node 6]
+    node5-->node6
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
 
 }
