@@ -1,6 +1,5 @@
 ﻿using MermaidDotNet.Models;
 using System.Text;
-using System.Xml.Linq;
 
 namespace MermaidDotNet;
 
@@ -9,6 +8,7 @@ public class Flowchart
     public string Direction { get; set; }
     public List<Node> Nodes { get; set; }
     public List<Link> Links { get; set; }
+    public List<string> LinkStyles { get; set; }
     public List<SubGraph>? SubGraphs { get; set; }
     public List<Node> NavigationNodes { get; set; }
 
@@ -30,6 +30,7 @@ public class Flowchart
         }
         Nodes = nodes;
         Links = links;
+        LinkStyles = new();
         SubGraphs = subGraphs;
         NavigationNodes = new();
         foreach (Node node in Nodes)
@@ -98,6 +99,20 @@ public class Flowchart
         {
             sb.Append(AddLink(link));
         }
+
+        //Add link styles
+        if (LinkStyles.Count > 0)
+        {
+            for (int i = 0; i < LinkStyles.Count; i++)
+            {
+                sb.Append("    ");
+                sb.Append("linkStyle ");
+                sb.Append(i.ToString());
+                sb.Append(' ');
+                sb.Append(LinkStyles[i]);
+                sb.Append(Environment.NewLine);
+            }
+        }
         return sb.ToString();
     }
 
@@ -133,6 +148,13 @@ public class Flowchart
         sb.Append('>');
         sb.Append(destinationNode.Name);
         sb.Append(Environment.NewLine);
+
+        //if there is a style, add it to the list
+        if (!string.IsNullOrEmpty(link.LinkStyle))
+        {
+            LinkStyles.Add(link.LinkStyle);
+        }
+
         return sb.ToString();
     }
 

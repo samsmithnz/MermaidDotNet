@@ -192,6 +192,41 @@ public class FlowchartCalculationTests
     }
 
     [TestMethod]
+    public void ThreeNodesAndTwoLinksWithMultipleColorsFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1"),
+            new("node2", "This is node 2"),
+            new("node3", "This is node 3")
+        };
+        List<Link> links = new()
+        {
+            new Link("node1", "node2", "12s", "stroke-width:4px,stroke:red"),
+            new Link("node1", "node3", "3mins")
+        };
+        Flowchart flowchart = new(direction, nodes, links);
+        string expected = @"flowchart LR
+    node1[This is node 1]
+    node2[This is node 2]
+    node3[This is node 3]
+    node1--12s-->node2
+    node1--3mins-->node3
+    linkStyle 0 stroke-width:4px,stroke:red
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
     public void TwoNodesInASubGraphFlowchart()
     {
         //Arrange
