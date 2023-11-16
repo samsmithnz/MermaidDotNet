@@ -31,7 +31,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
     - name: .NET test
       run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release
     #- name: .NET publish
@@ -54,7 +54,7 @@ jobs:
         uses: samsmithnz/SamsDotNetSonarCloudAction@v2.0.1
         with:
           projects: 'src/MermaidDotNet/MermaidDotNet.csproj,src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj'
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x'
           sonarcloud-organization: samsmithnz-github
           sonarcloud-project: samsmithnz_MermaidDotNet
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
