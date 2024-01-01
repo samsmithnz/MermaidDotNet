@@ -39,7 +39,7 @@ jobs:
     - name: .NET pack
       run: dotnet pack src/MermaidDotNet/MermaidDotNet.csproj -c Release --nologo -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: drop
         path: src/MermaidDotNet/bin/Release
