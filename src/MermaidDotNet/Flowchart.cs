@@ -131,9 +131,13 @@ public class Flowchart
     private string AddLink(Link link)
     {
         StringBuilder sb = new();
+        if (NavigationNodes.Count == 0 && Nodes.Count > 1)
+        {
+            throw new ArgumentException("The NavigationNodes collection is empty, but Nodes collection is not empty. This is likely an issue because Nodes were added manually instead of as a collection in the FlowChart constructor");
+        }
         Node? sourceNode = NavigationNodes.Find(n => n.Name == link.SourceNode);
         Node? destinationNode = NavigationNodes.Find(n => n.Name == link.DestinationNode);
-        if (sourceNode == null )
+        if (sourceNode == null)
         {
             throw new ArgumentException("Source node in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
         }
