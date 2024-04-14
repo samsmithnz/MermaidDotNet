@@ -133,9 +133,13 @@ public class Flowchart
         StringBuilder sb = new();
         Node? sourceNode = NavigationNodes.Find(n => n.Name == link.SourceNode);
         Node? destinationNode = NavigationNodes.Find(n => n.Name == link.DestinationNode);
-        if (sourceNode == null || destinationNode == null)
+        if (sourceNode == null )
         {
-            throw new ArgumentException("Nodes in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
+            throw new ArgumentException("Source node in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
+        }
+        if (destinationNode == null)
+        {
+            throw new ArgumentException("Destination node in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
         }
         sb.Append("    ");
         sb.Append(sourceNode.Name);
