@@ -139,11 +139,11 @@ public class Flowchart
         Node? destinationNode = NavigationNodes.Find(n => n.Name == link.DestinationNode);
         if (sourceNode == null)
         {
-            throw new ArgumentException("Source node in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
+            throw new ArgumentException("Source node (" + link.SourceNode + ") in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
         }
         if (destinationNode == null)
         {
-            throw new ArgumentException("Destination node in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
+            throw new ArgumentException("Destination node (" + link.DestinationNode + ") in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
         }
         sb.Append("    ");
         sb.Append(sourceNode.Name);
