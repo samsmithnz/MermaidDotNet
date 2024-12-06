@@ -2,12 +2,12 @@
 {
     public class Link
     {
-        public Link(string sourceNode, string destinationNode, string? text = null, string? linkstyle = null, bool bidirectional = false)
+        public Link(string sourceNode, string destinationNode, string? text = null, string? linkstyle = null, bool isBidirectional = false)
         {
             SourceNode = sourceNode.Replace(" ", "");
             DestinationNode = destinationNode.Replace(" ", "");
             Text = text;
-            IsBidirectional = bidirectional;
+            IsBidirectional = isBidirectional;
             LinkStyle = linkstyle;
         }
 
