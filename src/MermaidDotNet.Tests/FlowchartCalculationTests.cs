@@ -158,6 +158,36 @@ public class FlowchartCalculationTests
     }
 
     [TestMethod]
+    public void TwoNodesAndBidirectionalLinkTextFlowchart()
+    {
+        //Arrange
+        string direction = "LR";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1"),
+            new("node2", "This is node 2")
+        };
+        List<Link> links = new()
+        {
+            new Link("node1", "node2", "link text!", isBidirectional: true)
+        };
+        Flowchart flowchart = new(direction, nodes, links);
+        string expected = @"flowchart LR
+    node1[This is node 1]
+    node2[This is node 2]
+    node1<--link text!-->node2
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
     public void ThreeNodesAndTwoLinksFlowchart()
     {
         //Arrange

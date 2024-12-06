@@ -145,8 +145,15 @@ public class Flowchart
         {
             throw new ArgumentException("Destination node (" + link.DestinationNode + ") in link connection (" + link.SourceNode + "-->" + link.DestinationNode + ") not found");
         }
+
         sb.Append("    ");
         sb.Append(sourceNode.Name);
+
+        if (link.IsBidirectional)
+        {
+            sb.Append('<');
+        }
+
         sb.Append("--");
         if (!string.IsNullOrEmpty(link.Text))
         {
