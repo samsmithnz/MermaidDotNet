@@ -34,6 +34,8 @@ jobs:
         dotnet-version: 8.0.x
     - name: .NET test
       run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release
+    - name: .NET test ClassDiagram
+      run: dotnet test src/MermaidDotNet.Tests/ClassDiagramTests.cs -c Release
     #- name: .NET publish
     #  run: dotnet publish src/MermaidDotNet/MermaidDotNet.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: .NET pack
