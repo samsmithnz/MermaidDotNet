@@ -1,0 +1,45 @@
+﻿@page "/"
+@using MermaidDotNet.Models
+@inject IJSRuntime JSRuntime
+
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<body>
+    Here is a mermaid diagram:
+    <MermaidDiagram Definition="@graph" />
+</body>
+
+@code {
+    string graph = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string direction = "LR";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1"),
+            new("node2", "This is node 2", Node.ShapeType.Hexagon),
+            new("node3", "This is node 3", Node.ShapeType.Rounded)
+        };
+        List<Link> links = new()
+        {
+            new Link("node1", "node2", "12s"),
+            new Link("node1", "node3", "3mins")
+        };
+        Flowchart flowchart = new(direction, nodes, links);
+        graph = flowchart.CalculateFlowchart();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // if (firstRender)
+        // {
+        //     await JSRuntime.InvokeVoidAsync("initializeMermaid");
+        // }
+    }
+}
