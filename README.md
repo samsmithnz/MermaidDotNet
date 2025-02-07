@@ -63,3 +63,13 @@ flowchart LR
         mermaid.initialize({ startOnLoad: true });
     </script>
 </body>
+
+## Sample Projects
+
+### [MermaidDotNet.BlazorApp](src/MermaidDotNet.BlazorApp)
+
+This is a sample Blazor application that demonstrates how to use the MermaidDotNet library to create and render Mermaid diagrams in a Blazor web application. The project includes examples of creating flowcharts and rendering them using the Mermaid.js library.
+
+### [MermaidDotNet.MVCWeb](src/MermaidDotNet.MVCWeb)
+
+This is a sample ASP.NET Core MVC web application that demonstrates how to use the MermaidDotNet library to create and render Mermaid diagrams in an MVC web application. The project includes examples of creating flowcharts and rendering them using the Mermaid.js library.
