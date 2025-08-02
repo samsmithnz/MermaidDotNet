@@ -68,14 +68,14 @@ Example with multiple node shapes, link types, arrow types, and styling:
         new("process1", "Data Processing", Node.ShapeType.Rectangle),
         new("decision", "Valid Data?", Node.ShapeType.Rhombus),
         new("process2", "Transform Data", Node.ShapeType.Parallelogram),
-        new("end", "Complete", Node.ShapeType.Stadium)
+        new("end2", "Complete", Node.ShapeType.Stadium)
     };
     List<Link> links = new()
     {
         new Link("start", "process1", "", null, false, Link.LinkType.Normal),
         new Link("process1", "decision", "validate", null, false, Link.LinkType.Dotted),
         new Link("decision", "process2", "yes", "stroke:green,stroke-width:3px", false, Link.LinkType.Thick),
-        new Link("process2", "end", "", null, false, Link.LinkType.Normal),
+        new Link("process2", "end2", "", null, false, Link.LinkType.Normal),
         new Link("decision", "process1", "", null, false, Link.LinkType.Normal, Link.ArrowType.Circle)
     };
     Flowchart flowchart = new(direction, nodes, links);
@@ -108,11 +108,11 @@ flowchart TD
     process1[Data Processing]
     decision{Valid Data?}
     process2[/Transform Data/]
-    end([Complete])
+    end2([Complete])
     start-->process1
     process1-.validate.->decision
     decision==yes==>process2
-    process2-->end
+    process2-->end2
     decision--oprocess1
     linkStyle 0 stroke:green,stroke-width:3px
     class start startClass
