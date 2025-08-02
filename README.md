@@ -101,7 +101,25 @@ flowchart TD
     click start "console.log('Started')"
 ```
 
-It's also possible to insert into HTML and rendor on the web. Here is a sample, referencing the mermaid.js CDN.
+When rendered in mermaid, the advanced graph looks like this:
+```mermaid  
+flowchart TD
+    start((Start Process))
+    process1[Data Processing]
+    decision{Valid Data?}
+    process2[/Transform Data/]
+    end([Complete])
+    start-->process1
+    process1-.validate.->decision
+    decision==yes==>process2
+    process2-->end
+    decision--oprocess1
+    linkStyle 0 stroke:green,stroke-width:3px
+    class start startClass
+    click start "console.log('Started')"
+```
+
+## It's also possible to insert into HTML and rendor on the web. Here is a sample, referencing the mermaid.js CDN.
 
 ```html
 <h2>Production Graph</h2>
@@ -123,10 +141,10 @@ flowchart LR
 
 ## Sample Projects
 
-### [MermaidDotNet.BlazorApp](src/MermaidDotNet.BlazorApp)
-
-This is a sample Blazor application that demonstrates how to use the MermaidDotNet library to create and render Mermaid diagrams in a Blazor web application. The project includes examples of creating flowcharts and rendering them using the Mermaid.js library.
-
 ### [MermaidDotNet.MVCWeb](src/MermaidDotNet.MVCWeb)
 
 This is a sample ASP.NET Core MVC web application that demonstrates how to use the MermaidDotNet library to create and render Mermaid diagrams in an MVC web application. The project includes examples of creating flowcharts and rendering them using the Mermaid.js library.
+
+### [MermaidDotNet.BlazorApp](src/MermaidDotNet.BlazorApp)
+
+This is a sample Blazor application that demonstrates how to use the MermaidDotNet library to create and render Mermaid diagrams in a Blazor web application. The project includes examples of creating flowcharts and rendering them using the Mermaid.js library.
