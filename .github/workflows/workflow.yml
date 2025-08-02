@@ -33,7 +33,12 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: .NET test
-      run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release
+      run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=lcov -l:"trx;LogFileName=${{ github.workspace }}/TestOutput.xml"
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: src/MermaidDotNet.Tests/TestResults/coverage.info
     #- name: .NET publish
     #  run: dotnet publish src/MermaidDotNet/MermaidDotNet.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MajorMinorPatch }}'
     - name: .NET pack

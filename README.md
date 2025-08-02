@@ -1,5 +1,6 @@
 # MermaidDotNet
 [![CI/CD](https://github.com/samsmithnz/MermaidDotNet/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/MermaidDotNet/actions/workflows/workflow.yml)
+[![Coverage Status](https://coveralls.io/repos/github/samsmithnz/MermaidDotNet/badge.svg?branch=main)](https://coveralls.io/github/samsmithnz/MermaidDotNet?branch=main)
 [![Latest NuGet package](https://img.shields.io/nuget/v/MermaidDotNet)](https://www.nuget.org/packages/MermaidDotNet/)
 [![Current Release](https://img.shields.io/github/release/samsmithnz/MermaidDotNet/all.svg)](https://github.com/samsmithnz/MermaidDotNet/releases)
 
