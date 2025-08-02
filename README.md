@@ -34,8 +34,7 @@ Very simple example, to create a Left->Right graph (LR), with two nodes linked.
     Flowchart flowchart = new(direction, nodes, links);
     string result = flowchart.CalculateFlowchart();
 ```
-
-The mermaid result is below - which can be inserted into markdown in GitHub ([blog announcement](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/))
+The resultant mermaid code is shown below - which can be inserted into markdown in GitHub ([blog announcement](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/))
 
 ```
 flowchart LR
@@ -45,6 +44,17 @@ flowchart LR
     node1--12s-->node2
     node1--3mins-->node3
 ```
+
+When rendered in mermaid, the graph looks like this:
+```mermaid  
+flowchart LR
+    node1[This is node 1]
+    node2{{This is node 2}}
+    node3(This is node 3)
+    node1--12s-->node2
+    node1--3mins-->node3
+```
+
 
 ## Advanced Example
 
@@ -89,16 +99,6 @@ flowchart TD
     linkStyle 0 stroke:green,stroke-width:3px
     class start startClass
     click start "console.log('Started')"
-```
-
-Which when rendered in mermaid, looks like this:
-```mermaid  
-flowchart LR
-    node1[This is node 1]
-    node2{{This is node 2}}
-    node3(This is node 3)
-    node1--12s-->node2
-    node1--3mins-->node3
 ```
 
 It's also possible to insert into HTML and rendor on the web. Here is a sample, referencing the mermaid.js CDN.
