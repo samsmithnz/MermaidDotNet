@@ -574,4 +574,73 @@ public class FlowchartCalculationTests
         Assert.IsNotNull(result);
         Assert.AreEqual(expected, result);
     }
+
+    [TestMethod]
+    public void ValidBTDirectionFlowchart()
+    {
+        //Arrange
+        string direction = "BT";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1")
+        };
+        Flowchart flowchart = new(direction, nodes, new());
+        string expected = @"flowchart BT
+    node1[This is node 1]
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void ValidRLDirectionFlowchart()
+    {
+        //Arrange
+        string direction = "RL";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1")
+        };
+        Flowchart flowchart = new(direction, nodes, new());
+        string expected = @"flowchart RL
+    node1[This is node 1]
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void ValidTBDirectionFlowchart()
+    {
+        //Arrange
+        string direction = "TB";
+        List<Node> nodes = new()
+        {
+            new("node1", "This is node 1")
+        };
+        Flowchart flowchart = new(direction, nodes, new());
+        string expected = @"flowchart TB
+    node1[This is node 1]
+";
+
+        //Act
+        string result = flowchart.CalculateFlowchart();
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(expected, result);
+    }
 }

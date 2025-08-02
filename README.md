@@ -3,7 +3,18 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/MermaidDotNet)](https://www.nuget.org/packages/MermaidDotNet/)
 [![Current Release](https://img.shields.io/github/release/samsmithnz/MermaidDotNet/all.svg)](https://github.com/samsmithnz/MermaidDotNet/releases)
 
-A .NET wrapper to create [Mermaid](https://mermaid.js.org/) code to render flowcharts, that can then be inserted into markdown or directly displayed in HTML with mermaid.js.
+A comprehensive .NET wrapper to create [Mermaid](https://mermaid.js.org/) flowcharts with full syntax support, that can then be inserted into markdown or directly displayed in HTML with mermaid.js.
+
+## Features
+
+- **Directions**: LR (Left-Right), TD/TB (Top-Down/Top-Bottom), BT (Bottom-Top), RL (Right-Left)
+- **Node Shapes**: Rectangle, Rounded, Stadium, Cylinder, Circle, Rhombus, Hexagon, Parallelogram, Trapezoid, TrapezoidAlt, Subroutine
+- **Link Types**: Normal (--), Dotted (-.), Thick (==), Invisible (~~~)
+- **Arrow Types**: Normal (>), Circle (o), Cross (x), Open (>)
+- **Advanced Features**: CSS Classes, Click Actions, Bidirectional Links, Link Styling
+- **Subgraphs**: Nested grouping with custom directions
+
+## Basic Example
 
 Very simple example, to create a Left->Right graph (LR), with two nodes linked. 
 ```csharp
@@ -32,6 +43,51 @@ flowchart LR
     node3(This is node 3)
     node1--12s-->node2
     node1--3mins-->node3
+```
+
+## Advanced Example
+
+Example with multiple node shapes, link types, arrow types, and styling:
+
+```csharp
+    string direction = "TD";
+    List<Node> nodes = new()
+    {
+        new("start", "Start Process", Node.ShapeType.Circle, "startClass", "console.log('Started')"),
+        new("process1", "Data Processing", Node.ShapeType.Rectangle),
+        new("decision", "Valid Data?", Node.ShapeType.Rhombus),
+        new("process2", "Transform Data", Node.ShapeType.Parallelogram),
+        new("end", "Complete", Node.ShapeType.Stadium)
+    };
+    List<Link> links = new()
+    {
+        new Link("start", "process1", "", null, false, Link.LinkType.Normal),
+        new Link("process1", "decision", "validate", null, false, Link.LinkType.Dotted),
+        new Link("decision", "process2", "yes", "stroke:green,stroke-width:3px", false, Link.LinkType.Thick),
+        new Link("process2", "end", "", null, false, Link.LinkType.Normal),
+        new Link("decision", "process1", "", null, false, Link.LinkType.Normal, Link.ArrowType.Circle)
+    };
+    Flowchart flowchart = new(direction, nodes, links);
+    string result = flowchart.CalculateFlowchart();
+```
+
+The advanced mermaid result:
+
+```
+flowchart TD
+    start((Start Process))
+    process1[Data Processing]
+    decision{Valid Data?}
+    process2[/Transform Data/]
+    end([Complete])
+    start-->process1
+    process1-.validate.->decision
+    decision==yes==>process2
+    process2-->end
+    decision--oprocess1
+    linkStyle 0 stroke:green,stroke-width:3px
+    class start startClass
+    click start "console.log('Started')"
 ```
 
 Which when rendered in mermaid, looks like this:

@@ -2,18 +2,22 @@
 {
     public class Node
     {
-        public Node(string name, string text, ShapeType shape = ShapeType.Rectangle)
+        public Node(string name, string text, ShapeType shape = ShapeType.Rectangle, string? cssClass = null, string? clickAction = null)
         {
             Name = name.Replace(" ","");
             Text = text;
             Dependencies = new();
             Shape = shape;
+            CssClass = cssClass;
+            ClickAction = clickAction;
         }
 
         public string Name { get; set; }
         public string Text { get; set; }
         public List<Node> Dependencies { get; set; }
         public ShapeType Shape { get; set; }
+        public string? CssClass { get; set; }
+        public string? ClickAction { get; set; }
 
         public enum ShapeType
         {
@@ -23,7 +27,11 @@
             Cylinder,
             Circle,
             Rhombus,
-            Hexagon
+            Hexagon,
+            Parallelogram,
+            Trapezoid,
+            TrapezoidAlt,
+            Subroutine
         }
 
         public string OpenShape()
@@ -44,6 +52,14 @@
                     return "{";
                 case ShapeType.Hexagon:
                     return "{{";
+                case ShapeType.Parallelogram:
+                    return "[/";
+                case ShapeType.Trapezoid:
+                    return "[\\";
+                case ShapeType.TrapezoidAlt:
+                    return "[/";
+                case ShapeType.Subroutine:
+                    return "[[";
                 default: // Rectangle is default
                     return "[";
             }
@@ -67,6 +83,14 @@
                     return "}";
                 case ShapeType.Hexagon:
                     return "}}";
+                case ShapeType.Parallelogram:
+                    return "/]";
+                case ShapeType.Trapezoid:
+                    return "\\]";
+                case ShapeType.TrapezoidAlt:
+                    return "\\]";
+                case ShapeType.Subroutine:
+                    return "]]";
                 default: // Rectangle is default
                     return "]";
             }
