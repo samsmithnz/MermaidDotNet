@@ -90,11 +90,11 @@ flowchart TD
     process1[Data Processing]
     decision{Valid Data?}
     process2[/Transform Data/]
-    end([Complete])
+    end2([Complete])
     start-->process1
     process1-.validate.->decision
     decision==yes==>process2
-    process2-->end
+    process2-->end2
     decision--oprocess1
     linkStyle 0 stroke:green,stroke-width:3px
     class start startClass
