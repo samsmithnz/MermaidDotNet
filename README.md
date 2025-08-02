@@ -4,7 +4,7 @@
 [![Latest NuGet package](https://img.shields.io/nuget/v/MermaidDotNet)](https://www.nuget.org/packages/MermaidDotNet/)
 [![Current Release](https://img.shields.io/github/release/samsmithnz/MermaidDotNet/all.svg)](https://github.com/samsmithnz/MermaidDotNet/releases)
 
-A comprehensive .NET wrapper to create [Mermaid](https://mermaid.js.org/) flowcharts with full syntax support, that can then be inserted into markdown or directly displayed in HTML with mermaid.js.
+A comprehensive .NET wrapper to create [Mermaid](https://mermaid.js.org/syntax/flowchart.html flowcharts) with full syntax support, that can then be inserted into markdown or directly displayed in HTML with mermaid.js.
 
 ## Features
 
