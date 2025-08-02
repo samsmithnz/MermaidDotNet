@@ -11,16 +11,18 @@ public class Flowchart
     public List<string> LinkStyles { get; set; }
     public List<SubGraph>? SubGraphs { get; set; }
     public List<Node> NavigationNodes { get; set; }
+    public List<string> NodeClasses { get; set; }
+    public List<string> ClickActions { get; set; }
 
     /// <summary>
     /// Initialize the flowchart
     /// </summary>
-    /// <param name="direction">Currently accepts LR and TR options</param>
+    /// <param name="direction">Accepts LR, TD, BT, RL, and TB options</param>
     /// <param name="nodes">A list of nodes</param>
     /// <param name="links">A list of links</param>
     public Flowchart(string direction, List<Node> nodes, List<Link> links, List<SubGraph>? subGraphs = null)
     {
-        if (direction != "LR" && direction != "TD")
+        if (direction != "LR" && direction != "TD" && direction != "BT" && direction != "RL" && direction != "TB")
         {
             throw new NotSupportedException("Direction " + direction + " is currently unsupported");
         }
@@ -31,6 +33,8 @@ public class Flowchart
         Nodes = nodes;
         Links = links;
         LinkStyles = new();
+        NodeClasses = new();
+        ClickActions = new();
         SubGraphs = subGraphs;
         NavigationNodes = new();
         foreach (Node node in Nodes)
@@ -113,6 +117,29 @@ public class Flowchart
                 sb.Append(Environment.NewLine);
             }
         }
+
+        //Add node classes
+        if (NodeClasses.Count > 0)
+        {
+            foreach (string nodeClass in NodeClasses)
+            {
+                sb.Append("    ");
+                sb.Append(nodeClass);
+                sb.Append(Environment.NewLine);
+            }
+        }
+
+        //Add click actions
+        if (ClickActions.Count > 0)
+        {
+            foreach (string clickAction in ClickActions)
+            {
+                sb.Append("    ");
+                sb.Append(clickAction);
+                sb.Append(Environment.NewLine);
+            }
+        }
+
         return sb.ToString();
     }
 
@@ -125,6 +152,17 @@ public class Flowchart
         sb.Append(node.Text);
         sb.Append(node.CloseShape());
         sb.Append(Environment.NewLine);
+
+        // Track node styling and actions for later addition
+        if (!string.IsNullOrEmpty(node.CssClass))
+        {
+            NodeClasses.Add($"class {node.Name} {node.CssClass}");
+        }
+        if (!string.IsNullOrEmpty(node.ClickAction))
+        {
+            ClickActions.Add($"click {node.Name} \"{node.ClickAction}\"");
+        }
+
         return sb.ToString();
     }
 
@@ -151,16 +189,24 @@ public class Flowchart
 
         if (link.IsBidirectional)
         {
-            sb.Append('<');
+            sb.Append(GetStartArrowSymbol(link.Arrow));
         }
 
-        sb.Append("--");
+        sb.Append(GetLinkSymbol(link.Type));
         if (!string.IsNullOrEmpty(link.Text))
         {
-            sb.Append(link.Text);
-            sb.Append("--");
+            if (link.Type == Link.LinkType.Dotted)
+            {
+                sb.Append(link.Text);
+                sb.Append(".-");
+            }
+            else
+            {
+                sb.Append(link.Text);
+                sb.Append(GetLinkSymbol(link.Type));
+            }
         }
-        sb.Append('>');
+        sb.Append(GetEndArrowSymbol(link.Arrow));
         sb.Append(destinationNode.Name);
         sb.Append(Environment.NewLine);
 
@@ -171,6 +217,42 @@ public class Flowchart
         }
 
         return sb.ToString();
+    }
+
+    private string GetLinkSymbol(Link.LinkType linkType)
+    {
+        return linkType switch
+        {
+            Link.LinkType.Normal => "--",
+            Link.LinkType.Dotted => "-.",
+            Link.LinkType.Thick => "==",
+            Link.LinkType.Invisible => "~~~",
+            _ => "--"
+        };
+    }
+
+    private string GetStartArrowSymbol(Link.ArrowType arrowType)
+    {
+        return arrowType switch
+        {
+            Link.ArrowType.Normal => "<",
+            Link.ArrowType.Circle => "o",
+            Link.ArrowType.Cross => "x",
+            Link.ArrowType.Open => "<",
+            _ => "<"
+        };
+    }
+
+    private string GetEndArrowSymbol(Link.ArrowType arrowType)
+    {
+        return arrowType switch
+        {
+            Link.ArrowType.Normal => ">",
+            Link.ArrowType.Circle => "o",
+            Link.ArrowType.Cross => "x", 
+            Link.ArrowType.Open => ">",
+            _ => ">"
+        };
     }
 
 }

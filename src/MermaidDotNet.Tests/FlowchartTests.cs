@@ -28,6 +28,42 @@ public class FlowchartTests
     }
 
     [TestMethod]
+    public void ValidBTFlowchart()
+    {
+        //Arrange
+        Flowchart flowchart = new("BT", new(), new());
+
+        //Act
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+    }
+
+    [TestMethod]
+    public void ValidRLFlowchart()
+    {
+        //Arrange
+        Flowchart flowchart = new("RL", new(), new());
+
+        //Act
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+    }
+
+    [TestMethod]
+    public void ValidTBFlowchart()
+    {
+        //Arrange
+        Flowchart flowchart = new("TB", new(), new());
+
+        //Act
+
+        //Assert
+        Assert.IsNotNull(flowchart);
+    }
+
+    [TestMethod]
     public void InvalidNoDirectionFlowchart()
     {
         //Arrange
