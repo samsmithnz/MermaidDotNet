@@ -77,7 +77,7 @@ jobs:
         echo "Version: ${{ needs.build.outputs.Version }}" 
         echo "CommitsSinceVersionSource: ${{ needs.build.outputs.CommitsSinceVersionSource }}" 
     - name: Download package artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
     - name: Create Release
       uses: ncipollo/release-action@v1
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only create a release if there has been a commit/version change
