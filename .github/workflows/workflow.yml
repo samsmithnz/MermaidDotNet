@@ -80,6 +80,7 @@ jobs:
       uses: actions/download-artifact@v5
       with:
         merge-multiple: true
+        path: drop
     - name: Create Release
       uses: ncipollo/release-action@v1
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only create a release if there has been a commit/version change
@@ -90,6 +91,6 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
     - name: Publish nuget package to nuget.org
       if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only publish a NuGet package if there has been a commit/version change
-      run: dotnet nuget push drop\*.nupkg --api-key "${{ secrets.NuGetToken }}" --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push "drop/*.nupkg" --api-key "${{ secrets.NuGetToken }}" --source "https://api.nuget.org/v3/index.json"
       shell: pwsh
       
