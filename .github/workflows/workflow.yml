@@ -77,7 +77,7 @@ jobs:
         echo "Version: ${{ needs.build.outputs.Version }}" 
         echo "CommitsSinceVersionSource: ${{ needs.build.outputs.CommitsSinceVersionSource }}" 
     - name: Download package artifacts
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         merge-multiple: true
         path: drop
