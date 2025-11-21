@@ -14,7 +14,7 @@ jobs:
       Version: ${{ steps.gitversion.outputs.MajorMinorPatch }}
       CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 0
     - name: Setup GitVersion
@@ -35,7 +35,7 @@ jobs:
     - name: .NET test
       run: dotnet test src/MermaidDotNet.Tests/MermaidDotNet.Tests.csproj -c Release -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=lcov -l:"trx;LogFileName=${{ github.workspace }}/TestOutput.xml"
     - name: Publish coverage report to coveralls.io
-      uses: coverallsapp/github-action@v2.3.6
+      uses: coverallsapp/github-action@v2.3.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: src/MermaidDotNet.Tests/TestResults/coverage.info
