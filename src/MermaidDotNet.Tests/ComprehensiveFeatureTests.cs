@@ -1,3 +1,4 @@
+using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 
 namespace MermaidDotNet.Tests;
@@ -13,29 +14,29 @@ public class ComprehensiveFeatureTests
     {
         //Arrange - Create a flowchart that uses every new feature
         string direction = "BT"; // New direction support
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             // Various new node shapes with styling and click actions
-            new("start", "Start Process", Node.ShapeType.Circle, "startNode", "startFlow()"),
-            new("input", "Input Data", Node.ShapeType.Parallelogram, "inputClass"),
-            new("validate", "Validate?", Node.ShapeType.Rhombus),
-            new("process", "Process", Node.ShapeType.Subroutine, null, "processData()"),
-            new("store", "Store Result", Node.ShapeType.Cylinder),
-            new("finish", "Complete", Node.ShapeType.Stadium)
+            new("start", "Start Process", ShapeType.Circle, "startNode", "startFlow()"),
+            new("input", "Input Data", ShapeType.Parallelogram, "inputClass"),
+            new("validate", "Validate?", ShapeType.Rhombus),
+            new("process", "Process", ShapeType.Subroutine, null, "processData()"),
+            new("store", "Store Result", ShapeType.Cylinder),
+            new("finish", "Complete", ShapeType.Stadium)
         };
         
         List<Link> links = new()
         {
             // Various new link types and arrow types
-            new Link("start", "input", "begin", null, false, Link.LinkType.Normal),
-            new Link("input", "validate", "check", null, false, Link.LinkType.Dotted),
-            new Link("validate", "process", "valid", "stroke:green,stroke-width:3px", false, Link.LinkType.Thick),
-            new Link("process", "store", "", null, false, Link.LinkType.Normal, Link.ArrowType.Circle),
-            new Link("store", "finish", "", null, false, Link.LinkType.Invisible),
-            new Link("validate", "input", "invalid", null, true, Link.LinkType.Normal, Link.ArrowType.Cross)
+            new Link("start", "input", "begin", null, false, LinkType.Normal),
+            new Link("input", "validate", "check", null, false, LinkType.Dotted),
+            new Link("validate", "process", "valid", "stroke:green,stroke-width:3px", false, LinkType.Thick),
+            new Link("process", "store", "", null, false, LinkType.Normal, ArrowType.Circle),
+            new Link("store", "finish", "", null, false, LinkType.Invisible),
+            new Link("validate", "input", "invalid", null, true, LinkType.Normal, ArrowType.Cross)
         };
 
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         
         string expected = @"flowchart BT
     start((Start Process))
@@ -54,11 +55,10 @@ public class ComprehensiveFeatureTests
     class start startNode
     class input inputClass
     click start ""startFlow()""
-    click process ""processData()""
-";
+    click process ""processData()""";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);

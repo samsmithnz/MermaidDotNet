@@ -1,4 +1,7 @@
-﻿namespace MermaidDotNet.Models
+﻿using MermaidDotNet.Enums;
+using System.Text;
+
+namespace MermaidDotNet.Models
 {
     public class Link
     {
@@ -21,20 +24,76 @@
         public LinkType Type { get; set; }
         public ArrowType Arrow { get; set; }
 
-        public enum LinkType
+        public string GetLinkString()
         {
-            Normal,
-            Dotted,
-            Thick,
-            Invisible
+            var link = SourceNode;
+            StringBuilder sb = new();
+            sb.Append(SourceNode);
+            if (IsBidirectional)
+            {
+                sb.Append(GetStartArrowSymbol(Arrow));
+            }
+
+            sb.Append(GetLinkSymbol(Type));
+
+            if (!string.IsNullOrEmpty(Text))
+            {
+                sb.Append(Text);
+                var linkSymbol = GetLinkSymbol(Type);
+                if (Type == LinkType.Dotted)
+                {
+                    linkSymbol = new string(linkSymbol.Reverse().ToArray());
+                }
+                sb.Append(linkSymbol);
+            }
+
+            sb.Append(GetEndArrowSymbol(Arrow));
+            sb.Append(DestinationNode);
+            return sb.ToString();
+        }
+        public string GetStyleString(int index)
+        {
+            if (string.IsNullOrEmpty(LinkStyle))
+            {
+                return string.Empty;
+            }
+            return $"linkStyle {index} {LinkStyle}";
         }
 
-        public enum ArrowType
+        private string GetLinkSymbol(LinkType linkType)
         {
-            Normal,
-            Circle,
-            Cross,
-            Open
+            return linkType switch
+            {
+                LinkType.Normal => "--",
+                LinkType.Dotted => "-.",
+                LinkType.Thick => "==",
+                LinkType.Invisible => "~~~",
+                _ => "--"
+            };
+        }
+
+        private string GetStartArrowSymbol(ArrowType arrowType)
+        {
+            return arrowType switch
+            {
+                ArrowType.Normal => "<",
+                ArrowType.Circle => "o",
+                ArrowType.Cross => "x",
+                ArrowType.Open => "<",
+                _ => "<"
+            };
+        }
+
+        private string GetEndArrowSymbol(ArrowType arrowType)
+        {
+            return arrowType switch
+            {
+                ArrowType.Normal => ">",
+                ArrowType.Circle => "o",
+                ArrowType.Cross => "x",
+                ArrowType.Open => ">",
+                _ => ">"
+            };
         }
     }
 }

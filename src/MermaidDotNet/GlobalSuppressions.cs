@@ -5,5 +5,5 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "This suggestion doesn't improve readability/maintainability", Scope = "member", Target = "~M:MermaidDotNet.Models.Node.CloseShape~System.String")]
-[assembly: SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "This suggestion doesn't improve readability/maintainability", Scope = "member", Target = "~M:MermaidDotNet.Models.Node.OpenShape~System.String")]
+[assembly: SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "This suggestion doesn't improve readability/maintainability", Scope = "member", Target = "~M:MermaidDotNet.Models.FlowNode.CloseShape~System.String")]
+[assembly: SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "This suggestion doesn't improve readability/maintainability", Scope = "member", Target = "~M:MermaidDotNet.Models.FlowNode.OpenShape~System.String")]

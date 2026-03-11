@@ -1,3 +1,4 @@
+using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 
 namespace MermaidDotNet.Tests;
@@ -10,17 +11,16 @@ public class NodeShapeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "This is a parallelogram", Node.ShapeType.Parallelogram)
+            new("node1", "This is a parallelogram", ShapeType.Parallelogram)
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
-    node1[/This is a parallelogram/]
-";
+    node1[/This is a parallelogram/]";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -33,17 +33,16 @@ public class NodeShapeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "This is a trapezoid", Node.ShapeType.Trapezoid)
+            new("node1", "This is a trapezoid", ShapeType.Trapezoid)
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
-    node1[\This is a trapezoid\]
-";
+    node1[\This is a trapezoid\]";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -56,17 +55,16 @@ public class NodeShapeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "This is a trapezoid alt", Node.ShapeType.TrapezoidAlt)
+            new("node1", "This is a trapezoid alt", ShapeType.TrapezoidAlt)
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
-    node1[/This is a trapezoid alt\]
-";
+    node1[/This is a trapezoid alt\]";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -79,17 +77,16 @@ public class NodeShapeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "This is a subroutine", Node.ShapeType.Subroutine)
+            new("node1", "This is a subroutine", ShapeType.Subroutine)
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
-    node1[[This is a subroutine]]
-";
+    node1[[This is a subroutine]]";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);

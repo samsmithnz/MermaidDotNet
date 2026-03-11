@@ -7,7 +7,7 @@ public class FlowchartTests
     public void ValidTDFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("TD", new(), new());
+        FlowchartDiagram flowchart = new(new(), new(), "TD");
 
         //Act
 
@@ -19,7 +19,7 @@ public class FlowchartTests
     public void ValidLRFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("LR", new(), new());
+        FlowchartDiagram flowchart = new(new(), new(), "LR");
 
         //Act
 
@@ -31,7 +31,7 @@ public class FlowchartTests
     public void ValidBTFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("BT", new(), new());
+        FlowchartDiagram flowchart = new(new(), new(), "BT");
 
         //Act
 
@@ -43,7 +43,7 @@ public class FlowchartTests
     public void ValidRLFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("RL", new(), new());
+        FlowchartDiagram flowchart = new(new(), new(), "RL");
 
         //Act
 
@@ -55,7 +55,7 @@ public class FlowchartTests
     public void ValidTBFlowchart()
     {
         //Arrange
-        Flowchart flowchart = new("TB", new(), new());
+        FlowchartDiagram flowchart = new(new(), new(), "TB");
 
         //Act
 
@@ -69,7 +69,7 @@ public class FlowchartTests
         //Arrange
         try
         {
-            Flowchart flowchart = new("none", new(), new());
+            FlowchartDiagram flowchart = new(new(), new(), "none");
 
             //Act
 
@@ -90,7 +90,7 @@ public class FlowchartTests
         //Arrange
         try
         {
-            Flowchart flowchart = new("LR", new(), new());
+            FlowchartDiagram flowchart = new(new(), new(), "LR");
             flowchart.Nodes.Add(new("node1", "node1"));
 
             //Act
@@ -110,12 +110,12 @@ public class FlowchartTests
         //Arrange
         try
         {
-            List<Models.Node> nodes = [new("node2", "node2")];
-            Flowchart flowchart = new("LR", nodes, new());
+            List<Models.FlowNode> nodes = [new("node2", "node2")];
+            FlowchartDiagram flowchart = new(nodes, new(), "LR");
             flowchart.Links.Add(new("node1", "node2", "1"));
 
             //Act
-            flowchart.CalculateFlowchart();
+            flowchart.CalculateDiagram();
 
             //Assert
             Assert.IsNotNull(flowchart);
@@ -132,12 +132,12 @@ public class FlowchartTests
         //Arrange
         try
         {
-            List<Models.Node> nodes = [new("node1", "node1")];
-            Flowchart flowchart = new("LR", nodes, new());
+            List<Models.FlowNode> nodes = [new("node1", "node1")];
+            FlowchartDiagram flowchart = new(nodes, new(), "LR");
             flowchart.Links.Add(new("node1", "node2", "1"));
 
             //Act
-            flowchart.CalculateFlowchart();
+            flowchart.CalculateDiagram();
 
             //Assert
             Assert.IsNotNull(flowchart);

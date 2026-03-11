@@ -1,99 +1,45 @@
-﻿namespace MermaidDotNet.Models
+﻿using System.Text;
+using System.Xml.Linq;
+
+namespace MermaidDotNet.Models
 {
     public class Node
     {
-        public Node(string name, string text, ShapeType shape = ShapeType.Rectangle, string? cssClass = null, string? clickAction = null)
+        public Node(string name, string text, string? cssClass = null)
         {
-            Name = name.Replace(" ","");
+            Name = name.Replace(" ", "");
             Text = text;
-            Dependencies = new();
-            Shape = shape;
             CssClass = cssClass;
-            ClickAction = clickAction;
         }
 
         public string Name { get; set; }
         public string Text { get; set; }
-        public List<Node> Dependencies { get; set; }
-        public ShapeType Shape { get; set; }
         public string? CssClass { get; set; }
-        public string? ClickAction { get; set; }
 
-        public enum ShapeType
+        public virtual string GetNodeString()
         {
-            Rectangle,
-            Rounded,
-            Stadium,
-            Cylinder,
-            Circle,
-            Rhombus,
-            Hexagon,
-            Parallelogram,
-            Trapezoid,
-            TrapezoidAlt,
-            Subroutine
-        }
+            var sb = new StringBuilder();
+            sb.Append(Name);
 
-        public string OpenShape()
-        {
-            switch (Shape)
+            if (!string.IsNullOrEmpty(Text))
             {
-                case ShapeType.Rectangle:
-                    return "[";
-                case ShapeType.Rounded:
-                    return "(";
-                case ShapeType.Stadium:
-                    return "([";
-                case ShapeType.Cylinder:
-                    return "[(";
-                case ShapeType.Circle:
-                    return "((";
-                case ShapeType.Rhombus:
-                    return "{";
-                case ShapeType.Hexagon:
-                    return "{{";
-                case ShapeType.Parallelogram:
-                    return "[/";
-                case ShapeType.Trapezoid:
-                    return "[\\";
-                case ShapeType.TrapezoidAlt:
-                    return "[/";
-                case ShapeType.Subroutine:
-                    return "[[";
-                default: // Rectangle is default
-                    return "[";
+                sb.Append(GetSurroundedText());
             }
-        }
 
-        public string CloseShape()
+            return sb.ToString();
+        }
+        public virtual string GetClassString()
         {
-            switch (Shape)
+            if (string.IsNullOrEmpty(CssClass))
             {
-                case ShapeType.Rectangle:
-                    return "]";
-                case ShapeType.Rounded:
-                    return ")";
-                case ShapeType.Stadium:
-                    return "])";
-                case ShapeType.Cylinder:
-                    return ")]";
-                case ShapeType.Circle:
-                    return "))";
-                case ShapeType.Rhombus:
-                    return "}";
-                case ShapeType.Hexagon:
-                    return "}}";
-                case ShapeType.Parallelogram:
-                    return "/]";
-                case ShapeType.Trapezoid:
-                    return "\\]";
-                case ShapeType.TrapezoidAlt:
-                    return "\\]";
-                case ShapeType.Subroutine:
-                    return "]]";
-                default: // Rectangle is default
-                    return "]";
+                return string.Empty;
             }
+
+            return $"class {Name} {CssClass}";
+        }
+        protected virtual string GetSurroundedText()
+        {
+            return $"[{Text}]";
         }
     }
 }

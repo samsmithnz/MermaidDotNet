@@ -1,3 +1,4 @@
+using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 
 namespace MermaidDotNet.Tests;
@@ -10,18 +11,17 @@ public class AdvancedFeaturesTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "Styled Node", Node.ShapeType.Rectangle, "myClass")
+            new("node1", "Styled Node", ShapeType.Rectangle, "myClass")
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
     node1[Styled Node]
-    class node1 myClass
-";
+    class node1 myClass";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -34,18 +34,17 @@ public class AdvancedFeaturesTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "Clickable Node", Node.ShapeType.Rectangle, null, "https://example.com")
+            new("node1", "Clickable Node", ShapeType.Rectangle, null, "https://example.com")
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
     node1[Clickable Node]
-    click node1 ""https://example.com""
-";
+    click node1 ""https://example.com""";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -58,19 +57,18 @@ public class AdvancedFeaturesTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("node1", "Styled Clickable Node", Node.ShapeType.Rectangle, "highlightClass", "alert('Hello!')")
+            new("node1", "Styled Clickable Node", ShapeType.Rectangle, "highlightClass", "alert('Hello!')")
         };
-        Flowchart flowchart = new(direction, nodes, new());
+        FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart LR
     node1[Styled Clickable Node]
     class node1 highlightClass
-    click node1 ""alert('Hello!')""
-";
+    click node1 ""alert('Hello!')""";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -83,21 +81,21 @@ public class AdvancedFeaturesTests
     {
         //Arrange
         string direction = "TD";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
-            new("start", "Start", Node.ShapeType.Circle, "startClass", "console.log('Start clicked')"),
-            new("process", "Process Data", Node.ShapeType.Rectangle),
-            new("decision", "Is Valid?", Node.ShapeType.Rhombus, "decisionClass"),
-            new("end", "End", Node.ShapeType.Circle)
+            new("start", "Start", ShapeType.Circle, "startClass", "console.log('Start clicked')"),
+            new("process", "Process Data", ShapeType.Rectangle),
+            new("decision", "Is Valid?", ShapeType.Rhombus, "decisionClass"),
+            new("end", "End", ShapeType.Circle)
         };
         List<Link> links = new()
         {
-            new Link("start", "process", "", null, false, Link.LinkType.Normal),
-            new Link("process", "decision", "validate", null, false, Link.LinkType.Dotted),
-            new Link("decision", "end", "yes", "stroke:green,stroke-width:3px", false, Link.LinkType.Thick),
-            new Link("decision", "process", "", null, false, Link.LinkType.Normal, Link.ArrowType.Circle)
+            new Link("start", "process", "", null, false, LinkType.Normal),
+            new Link("process", "decision", "validate", null, false, LinkType.Dotted),
+            new Link("decision", "end", "yes", "stroke:green,stroke-width:3px", false, LinkType.Thick),
+            new Link("decision", "process", "", null, false, LinkType.Normal, ArrowType.Circle)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart TD
     start((Start))
     process[Process Data]
@@ -110,11 +108,10 @@ public class AdvancedFeaturesTests
     linkStyle 0 stroke:green,stroke-width:3px
     class start startClass
     class decision decisionClass
-    click start ""console.log('Start clicked')""
-";
+    click start ""console.log('Start clicked')""";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);

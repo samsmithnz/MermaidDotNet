@@ -1,3 +1,4 @@
+using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 
 namespace MermaidDotNet.Tests;
@@ -10,24 +11,23 @@ public class LinkTypeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             new("node1", "Node 1"),
             new("node2", "Node 2")
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", "dotted", null, false, Link.LinkType.Dotted)
+            new Link("node1", "node2", "dotted", null, false, LinkType.Dotted)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart LR
     node1[Node 1]
     node2[Node 2]
-    node1-.dotted.->node2
-";
+    node1-.dotted.->node2";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -40,24 +40,23 @@ public class LinkTypeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             new("node1", "Node 1"),
             new("node2", "Node 2")
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", "thick", null, false, Link.LinkType.Thick)
+            new Link("node1", "node2", "thick", null, false, LinkType.Thick)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart LR
     node1[Node 1]
     node2[Node 2]
-    node1==thick==>node2
-";
+    node1==thick==>node2";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -70,24 +69,23 @@ public class LinkTypeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             new("node1", "Node 1"),
             new("node2", "Node 2")
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", "", null, false, Link.LinkType.Invisible)
+            new Link("node1", "node2", "", null, false, LinkType.Invisible)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart LR
     node1[Node 1]
     node2[Node 2]
-    node1~~~>node2
-";
+    node1~~~>node2";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -100,24 +98,23 @@ public class LinkTypeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             new("node1", "Node 1"),
             new("node2", "Node 2")
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", "", null, false, Link.LinkType.Normal, Link.ArrowType.Circle)
+            new Link("node1", "node2", "", null, false, LinkType.Normal, ArrowType.Circle)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart LR
     node1[Node 1]
     node2[Node 2]
-    node1--onode2
-";
+    node1--onode2";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -130,24 +127,23 @@ public class LinkTypeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             new("node1", "Node 1"),
             new("node2", "Node 2")
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", "", null, false, Link.LinkType.Normal, Link.ArrowType.Cross)
+            new Link("node1", "node2", "", null, false, LinkType.Normal, ArrowType.Cross)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart LR
     node1[Node 1]
     node2[Node 2]
-    node1--xnode2
-";
+    node1--xnode2";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);
@@ -160,24 +156,23 @@ public class LinkTypeTests
     {
         //Arrange
         string direction = "LR";
-        List<Node> nodes = new()
+        List<FlowNode> nodes = new()
         {
             new("node1", "Node 1"),
             new("node2", "Node 2")
         };
         List<Link> links = new()
         {
-            new Link("node1", "node2", "", null, true, Link.LinkType.Normal, Link.ArrowType.Circle)
+            new Link("node1", "node2", "", null, true, LinkType.Normal, ArrowType.Circle)
         };
-        Flowchart flowchart = new(direction, nodes, links);
+        FlowchartDiagram flowchart = new(nodes, links, direction);
         string expected = @"flowchart LR
     node1[Node 1]
     node2[Node 2]
-    node1o--onode2
-";
+    node1o--onode2";
 
         //Act
-        string result = flowchart.CalculateFlowchart();
+        string result = flowchart.CalculateDiagram();
 
         //Assert
         Assert.IsNotNull(flowchart);

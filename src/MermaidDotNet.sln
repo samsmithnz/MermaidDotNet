@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11430.68 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MermaidDotNet.Tests", "MermaidDotNet.Tests\MermaidDotNet.Tests.csproj", "{ADA8DF70-1BFD-45C6-8F28-061899BD8457}"
 EndProject
@@ -43,6 +43,10 @@ Global
 		{60367021-B81C-406B-B8A3-2353204C2E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60367021-B81C-406B-B8A3-2353204C2E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60367021-B81C-406B-B8A3-2353204C2E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

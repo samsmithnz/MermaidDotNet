@@ -1,3 +1,4 @@
+using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 using MermaidDotNet.MVCWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -17,19 +18,19 @@ namespace MermaidDotNet.MVCWeb.Controllers
         public IActionResult Index()
         {
             string direction = "LR";
-            List<Node> nodes = new()
+            List<FlowNode> nodes = new()
             {
                 new("node1", "This is node 1"),
-                new("node2", "This is node 2", Node.ShapeType.Hexagon),
-                new("node3", "This is node 3", Node.ShapeType.Rounded)
+                new("node2", "This is node 2", ShapeType.Hexagon),
+                new("node3", "This is node 3", ShapeType.Rounded)
             };
                     List<Link> links = new()
             {
                 new Link("node1", "node2", "12s"),
                 new Link("node1", "node3", "3mins")
             };
-            Flowchart flowchart = new(direction, nodes, links);
-            string graph = flowchart.CalculateFlowchart();
+            FlowchartDiagram flowchart = new(nodes, links, direction);
+            string graph = flowchart.CalculateDiagram();
 
             return View(model: graph);
         }
