@@ -1,7 +1,10 @@
+using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
+
 namespace MermaidDotNet.EntityFrameworkCore.Tests.Mock.Entities
 {
     internal class Assignment
     {
+        [Description("The unique identifier for the assignment.")]
         public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }

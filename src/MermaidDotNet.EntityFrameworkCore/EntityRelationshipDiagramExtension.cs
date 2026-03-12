@@ -1,9 +1,11 @@
 ﻿using MermaidDotNet.Diagrams;
+using MermaidDotNet.EntityFrameworkCore.Extensions;
 using MermaidDotNet.EntityFrameworkCore.Models;
 using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Options;
 
 namespace MermaidDotNet.EntityFrameworkCore
 {
@@ -11,12 +13,16 @@ namespace MermaidDotNet.EntityFrameworkCore
     {
         public static EntityRelationshipDiagram ToMermaidEntityDiagram(this DbContext dbContext)
         {
+            return dbContext.ToMermaidEntityDiagram(new EntityRelationshipDiagramOptions());
+        }
+        public static EntityRelationshipDiagram ToMermaidEntityDiagram(this DbContext dbContext, EntityRelationshipDiagramOptions options)
+        {
             var entityTypes = dbContext.Model.GetEntityTypes()
                 .Where(e => !e.IsOwned())
                 .ToList();
 
             var schema = BuildSchema(entityTypes);
-            return BuildEntityRelationshipDiagram(schema);
+            return BuildEntityRelationshipDiagram(schema, options);
         }
 
         private static RelationType GetRelationType(IForeignKey fk)
@@ -131,33 +137,89 @@ namespace MermaidDotNet.EntityFrameworkCore
             return table;
         }
 
-        private static EntityRelationshipDiagram BuildEntityRelationshipDiagram(DiagramSchema schema)
+        private static EntityRelationshipDiagram BuildEntityRelationshipDiagram(DiagramSchema schema, EntityRelationshipDiagramOptions options)
         {
             // Création des nœuds à partir des tables
-            var nodes = schema.Tables.Select(BuildTableNode).ToList();
+            var nodes = BuildEntityRelationNodes(schema, options);
 
-            // Création des liens à partir des DiagramLink
-            var links = schema.Links.Select(link =>
-                new EntityRelationLink(
-                    link.Source.Name,
-                    link.Target.Name,
-                    string.Join(" ", link.Label, $"({link.DeleteBehavior.ToString()})"),
-                    link.SourceType,
-                    link.TargetType
-                )
-            ).ToList();
+            // Création des liens à partir des DiagramLinks
+            var links = BuildEntityRelationLinks(schema, options);
 
             // Construction du diagramme
             return new EntityRelationshipDiagram(nodes, links);
         }
-        private static EntityRelationNode BuildTableNode(DiagramTable table)
-        {
-            var columnsEntities = table.Columns
-                .Select(c => new EntityRelationColumn(c.Name, c.Type.Name, c.ColumnKeyType))
-                .ToList();
 
-            return new EntityRelationNode(table.Name, columnsEntities);
+        private static List<EntityRelationNode> BuildEntityRelationNodes(DiagramSchema schema, EntityRelationshipDiagramOptions options)
+        {
+            var nodes = new List<EntityRelationNode>();
+            foreach (var table in schema.Tables)
+            {
+                nodes.Add(new EntityRelationNode(
+                    table.Name,
+                    BuildEntityRelationColumns(table, options)
+                ));
+            }
+            return nodes;
         }
 
+        private static List<EntityRelationColumn> BuildEntityRelationColumns(DiagramTable table, EntityRelationshipDiagramOptions options)
+        {
+            var columns = new List<EntityRelationColumn>();
+
+            if (!options.IncludeColumns)
+            {
+                return columns;
+            }
+
+            var filteredColumns = options.FilterColumnByKeyTypes != ColumnKeyType.None
+                ? table.Columns.Where(c => c.ColumnKeyType != ColumnKeyType.None && options.FilterColumnByKeyTypes.HasFlag(c.ColumnKeyType))
+                : table.Columns;
+            foreach (var column in filteredColumns)
+            {
+                var erColumn = new EntityRelationColumn(
+                    column.Name,
+                    column.Type.Name,
+                    options.IncludeColumnKeyTypes ? column.ColumnKeyType : ColumnKeyType.None,
+                    options.IncludeColumnComments ? column.Property.GetDescription() : string.Empty
+                );
+                columns.Add(erColumn);
+            }
+
+            return columns;
+        }
+
+        private static List<EntityRelationLink> BuildEntityRelationLinks(DiagramSchema schema, EntityRelationshipDiagramOptions options)
+        {
+            var links = new List<EntityRelationLink>();
+
+            if (!options.IncludeLinks)
+            {
+                return links;
+            }
+
+            foreach (var link in schema.Links)
+            {
+                var relationLabel = string.Empty;
+
+                if (options.IncludeLinkLabels)
+                {
+                    relationLabel = link.Label;
+                }
+
+                if (options.IncludeLinkDeleteBehaviors)
+                {
+                    relationLabel = string.Join(" ", relationLabel, $"({link.DeleteBehavior.ToString()})");
+                }
+
+                links.Add(new EntityRelationLink(
+                    link.Source.Name,
+                    link.Target.Name,
+                    relationLabel,
+                    link.SourceType,
+                    link.TargetType
+                ));
+            }
+            return links;
+        }
     }
 }
