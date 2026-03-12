@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet.BlazorApp", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet.EntityFrameworkCore", "MermaidDotNet.EntityFrameworkCore\MermaidDotNet.EntityFrameworkCore.csproj", "{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet.EntityFrameworkCore.Tests", "MermaidDotNet.EntityFrameworkCore.Tests\MermaidDotNet.EntityFrameworkCore.Tests.csproj", "{A6C0175F-42CC-E00B-BD41-D0A7BB6FEED8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6C0175F-42CC-E00B-BD41-D0A7BB6FEED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C0175F-42CC-E00B-BD41-D0A7BB6FEED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C0175F-42CC-E00B-BD41-D0A7BB6FEED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C0175F-42CC-E00B-BD41-D0A7BB6FEED8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

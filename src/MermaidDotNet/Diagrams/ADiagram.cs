@@ -1,12 +1,5 @@
-﻿using MermaidDotNet.Constants;
-using MermaidDotNet.Enums;
-using MermaidDotNet.Extensions;
+﻿using MermaidDotNet.Extensions;
 using MermaidDotNet.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MermaidDotNet.Diagrams
 {

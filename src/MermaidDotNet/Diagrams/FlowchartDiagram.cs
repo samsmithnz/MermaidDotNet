@@ -1,7 +1,6 @@
 ﻿using MermaidDotNet.Constants;
 using MermaidDotNet.Extensions;
 using MermaidDotNet.Models;
-using System.Text;
 
 namespace MermaidDotNet.Diagrams;
 

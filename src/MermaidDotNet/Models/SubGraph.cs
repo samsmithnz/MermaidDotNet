@@ -19,6 +19,6 @@
             Nodes = nodes;
             Links = links;
             Direction = direction;
-        }   
+        }
     }
 }

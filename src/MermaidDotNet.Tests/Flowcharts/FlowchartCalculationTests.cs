@@ -1,7 +1,6 @@
 using MermaidDotNet.Diagrams;
 using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
-using System.Xml.Linq;
 
 namespace MermaidDotNet.Tests.Flowcharts;
 

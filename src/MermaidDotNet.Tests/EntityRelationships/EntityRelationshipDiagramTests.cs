@@ -1,11 +1,6 @@
 ﻿using MermaidDotNet.Diagrams;
 using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MermaidDotNet.Tests.EntityRelationships
 {
@@ -66,33 +61,33 @@ namespace MermaidDotNet.Tests.EntityRelationships
 
             var expected = @"erDiagram
     User {
-        Id int ""PK""
-        Name string
-        Email string
+        int Id ""PK""
+        string Name
+        string Email
     }
     Order {
-        OrderId int ""PK""
-        UserId int ""FK""
-        OrderDate datetime
+        int OrderId ""PK""
+        int UserId ""FK""
+        datetime OrderDate
     }
     Product {
-        ProductId int ""PK""
-        Title string
-        Price decimal
+        int ProductId ""PK""
+        string Title
+        decimal Price
     }
     OrderItem {
-        OrderItemId int ""PK""
-        OrderId int ""FK""
-        ProductId int ""FK""
-        Quantity int
+        int OrderItemId ""PK""
+        int OrderId ""FK""
+        int ProductId ""FK""
+        int Quantity
     }
     Category {
-        CategoryId int ""PK""
-        Name string
+        int CategoryId ""PK""
+        string Name
     }
     ProductCategory {
-        ProductId int ""PK, FK""
-        CategoryId int ""PK, FK""
+        int ProductId ""PK, FK""
+        int CategoryId ""PK, FK""
     }
     User }|--o{ Order : ""UserId (Cascade)""
     Order }|--o{ OrderItem : ""OrderId""
@@ -143,8 +138,8 @@ namespace MermaidDotNet.Tests.EntityRelationships
 
             // Assert
             Assert.IsTrue(result.Contains("Customer"));
-            Assert.IsTrue(result.Contains("CustomerId int"));
-            Assert.IsTrue(result.Contains("FullName string"));
+            Assert.IsTrue(result.Contains("int CustomerId"));
+            Assert.IsTrue(result.Contains("string FullName"));
             Assert.IsFalse(result.Contains("--"));
         }
 

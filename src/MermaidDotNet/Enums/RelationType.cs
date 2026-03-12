@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MermaidDotNet.Enums
+﻿namespace MermaidDotNet.Enums
 {
     /// <summary>
     /// Types de relations pour les diagrammes ER Mermaid.

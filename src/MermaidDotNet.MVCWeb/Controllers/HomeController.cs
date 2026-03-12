@@ -25,7 +25,7 @@ namespace MermaidDotNet.MVCWeb.Controllers
                 new("node2", "This is node 2", ShapeType.Hexagon),
                 new("node3", "This is node 3", ShapeType.Rounded)
             };
-                    List<Link> links = new()
+            List<Link> links = new()
             {
                 new Link("node1", "node2", "12s"),
                 new Link("node1", "node3", "3mins")

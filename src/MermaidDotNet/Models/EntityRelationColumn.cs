@@ -1,9 +1,4 @@
 ﻿using MermaidDotNet.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MermaidDotNet.Models
 {
@@ -21,11 +16,18 @@ namespace MermaidDotNet.Models
 
         public string GetColumnString()
         {
-            var str = Name;
+            var str = Type;
 
-            if (!string.IsNullOrEmpty(Type))
+            if (!string.IsNullOrEmpty(Name))
             {
-                str = string.Join(" ", str, Type);
+                if (string.IsNullOrEmpty(str))
+                {
+                    str = Name;
+                }
+                else
+                {
+                    str = string.Join(" ", str, Name);
+                }
             }
 
             if (ColumnKeyType != ColumnKeyType.None)

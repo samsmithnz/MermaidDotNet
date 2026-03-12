@@ -25,7 +25,7 @@ public class ComprehensiveFeatureTests
             new("store", "Store Result", ShapeType.Cylinder),
             new("finish", "Complete", ShapeType.Stadium)
         };
-        
+
         List<Link> links = new()
         {
             // Various new link types and arrow types
@@ -38,7 +38,7 @@ public class ComprehensiveFeatureTests
         };
 
         FlowchartDiagram flowchart = new(nodes, links, direction);
-        
+
         string expected = @"flowchart BT
     start((Start Process))
     input[/Input Data/]
