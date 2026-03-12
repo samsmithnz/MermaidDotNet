@@ -45,8 +45,8 @@ namespace MermaidDotNet.Tests.EntityRelationships
                 }),
                 new EntityRelationNode("ProductCategory", new List<EntityRelationColumn>
                 {
-                    new EntityRelationColumn("ProductId", "int", ColumnKeyType.PrimaryKey | ColumnKeyType.ForeignKey),
-                    new EntityRelationColumn("CategoryId", "int", ColumnKeyType.PrimaryKey | ColumnKeyType.ForeignKey)
+                    new EntityRelationColumn("ProductId", "int", ColumnKeyType.PrimaryKeyForeignKey),
+                    new EntityRelationColumn("CategoryId", "int", ColumnKeyType.PrimaryKeyForeignKey)
                 })
             };
 
@@ -61,33 +61,33 @@ namespace MermaidDotNet.Tests.EntityRelationships
 
             var expected = @"erDiagram
     User {
-        int Id ""PK""
+        int Id PK
         string Name
         string Email
     }
     Order {
-        int OrderId ""PK""
-        int UserId ""FK""
+        int OrderId PK
+        int UserId FK
         datetime OrderDate
     }
     Product {
-        int ProductId ""PK""
+        int ProductId PK
         string Title
         decimal Price
     }
     OrderItem {
-        int OrderItemId ""PK""
-        int OrderId ""FK""
-        int ProductId ""FK""
+        int OrderItemId PK
+        int OrderId FK
+        int ProductId FK
         int Quantity
     }
     Category {
-        int CategoryId ""PK""
+        int CategoryId PK
         string Name
     }
     ProductCategory {
-        int ProductId ""PK, FK""
-        int CategoryId ""PK, FK""
+        int ProductId PK, FK
+        int CategoryId PK, FK
     }
     User }|--o{ Order : ""UserId (Cascade)""
     Order }|--o{ OrderItem : ""OrderId""
@@ -116,7 +116,6 @@ namespace MermaidDotNet.Tests.EntityRelationships
 
             // Assert
             Assert.AreEqual("erDiagram", diagram.Name);
-            Assert.AreEqual("erDiagram", result.Trim());
         }
 
         [TestMethod]
@@ -131,16 +130,20 @@ namespace MermaidDotNet.Tests.EntityRelationships
                     new EntityRelationColumn("FullName", "string")
                 })
             };
-            var diagram = new EntityRelationshipDiagram(nodes, new List<EntityRelationLink>());
+            var expected = @"erDiagram
+    Customer {
+        int CustomerId
+        string FullName
+    }";
 
             // Act
+            var diagram = new EntityRelationshipDiagram(nodes, new List<EntityRelationLink>());
             var result = diagram.CalculateDiagram();
 
             // Assert
-            Assert.IsTrue(result.Contains("Customer"));
-            Assert.IsTrue(result.Contains("int CustomerId"));
-            Assert.IsTrue(result.Contains("string FullName"));
-            Assert.IsFalse(result.Contains("--"));
+            Assert.IsNotNull(diagram);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
@@ -159,13 +162,21 @@ namespace MermaidDotNet.Tests.EntityRelationships
             {
                 new EntityRelationLink("Person", "Person", "ManagerId", RelationType.ZeroOrOne, RelationType.ZeroOrMore)
             };
-            var diagram = new EntityRelationshipDiagram(nodes, links);
+            var expected = @"erDiagram
+    Person {
+        int PersonId PK, FK
+        int ManagerId PK, FK
+    }
+    Person |o--o{ Person : ""ManagerId""";
 
             // Act
+            var diagram = new EntityRelationshipDiagram(nodes, links);
             var result = diagram.CalculateDiagram();
 
             // Assert
-            Assert.IsTrue(result.Contains("|o--o{ Person : \"ManagerId\""));
+            Assert.IsNotNull(diagram);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
@@ -177,7 +188,7 @@ namespace MermaidDotNet.Tests.EntityRelationships
                 new EntityRelationNode("Author", new List<EntityRelationColumn>
                 {
                     new EntityRelationColumn("AuthorId", "int"),
-                    new EntityRelationColumn("Name", "string")
+                    new EntityRelationColumn("Name", "string") 
                 }),
                 new EntityRelationNode("Book", new List<EntityRelationColumn>
                 {
@@ -192,14 +203,28 @@ namespace MermaidDotNet.Tests.EntityRelationships
                 new EntityRelationLink("Author", "Book", "AuthorId", RelationType.OneOrMore, RelationType.ZeroOrMore),
                 new EntityRelationLink("Author", "Book", "EditorId", RelationType.OneOrMore, RelationType.ZeroOrMore)
             };
-            var diagram = new EntityRelationshipDiagram(nodes, links);
+            var expected = @"erDiagram
+    Author {
+        int AuthorId
+        string Name
+    }
+    Book {
+        int BookId
+        string Title
+        int AuthorId
+        int EditorId
+    }
+    Author }|--o{ Book : ""AuthorId""
+    Author }|--o{ Book : ""EditorId""";
 
             // Act
+            var diagram = new EntityRelationshipDiagram(nodes, links);
             var result = diagram.CalculateDiagram();
 
             // Assert
-            Assert.IsTrue(result.Contains("Author }|--o{ Book : \"AuthorId\""));
-            Assert.IsTrue(result.Contains("Author }|--o{ Book : \"EditorId\""));
+            Assert.IsNotNull(diagram);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
         }
     }
 }

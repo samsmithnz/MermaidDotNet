@@ -20,6 +20,10 @@ namespace MermaidDotNet.Models
         public override string GetNodeString()
         {
             var lines = new List<string>();
+            if (Columns.Count == 0) 
+            {
+                return base.GetNodeString();
+            }
             lines.Add(string.Join(" ", base.GetNodeString(), "{"));
             lines.AddRange(Columns.Select(c => c.GetColumnString()).Indent());
             lines.Add("}");

@@ -7,11 +7,13 @@ namespace MermaidDotNet.Models
         public string Name { get; set; }
         public string Type { get; set; }
         public ColumnKeyType ColumnKeyType { get; set; }
-        public EntityRelationColumn(string name, string type = "", ColumnKeyType columnKeyType = ColumnKeyType.None)
+        public string Comment { get; set; }
+        public EntityRelationColumn(string name, string type = "", ColumnKeyType columnKeyType = ColumnKeyType.None, string comment = "")
         {
             Name = name;
             Type = type;
             ColumnKeyType = columnKeyType;
+            Comment = comment;
         }
 
         public string GetColumnString()
@@ -32,7 +34,12 @@ namespace MermaidDotNet.Models
 
             if (ColumnKeyType != ColumnKeyType.None)
             {
-                str = string.Join(" ", str, $"\"{GetRelationReferenceString()}\"");
+                str = string.Join(" ", str, GetRelationReferenceString());
+            }
+
+            if (!string.IsNullOrEmpty(Comment))
+            {
+                str = string.Join(" ", str, $"\"{Comment}\"");
             }
 
             return str;
@@ -47,9 +54,7 @@ namespace MermaidDotNet.Models
             if ((ColumnKeyType & ColumnKeyType.ForeignKey) == ColumnKeyType.ForeignKey)
                 references.Add("FK");
             if ((ColumnKeyType & ColumnKeyType.UniqueKey) == ColumnKeyType.UniqueKey)
-                references.Add("Unique");
-            if ((ColumnKeyType & ColumnKeyType.Indexed) == ColumnKeyType.Indexed)
-                references.Add("Indexed");
+                references.Add("UK");
 
             return references.Count > 0 ? string.Join(", ", references) : string.Empty;
         }

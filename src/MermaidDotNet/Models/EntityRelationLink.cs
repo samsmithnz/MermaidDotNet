@@ -13,13 +13,13 @@ namespace MermaidDotNet.Models
         public EntityRelationLink(
             string sourceNode,
             string destinationNode,
-            string text,
+            string label,
             RelationType sourceRelation,
             RelationType destinationRelation)
             : base(
                 sourceNode,
                 destinationNode,
-                text ?? GetMermaidRelationSyntax(sourceRelation, destinationRelation),
+                label ?? GetMermaidRelationSyntax(sourceRelation, destinationRelation),
                 null,
                 false,
                 LinkType.Normal,
@@ -50,7 +50,7 @@ namespace MermaidDotNet.Models
         {
             // Utilise la syntaxe Mermaid ER pour les relations
             string relationSyntax = GetMermaidRelationSyntax(SourceRelation, DestinationRelation);
-            string label = !string.IsNullOrEmpty(Text) ? $" : \"{Text}\"" : string.Empty;
+            string label = !string.IsNullOrEmpty(Label) ? $" : \"{Label}\"" : string.Empty;
             return $"{SourceNode} {relationSyntax} {DestinationNode}{label}";
         }
 

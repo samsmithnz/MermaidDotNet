@@ -6,10 +6,11 @@
         None = 0,
         PrimaryKey = 1,
         ForeignKey = 2,
+        UniqueKey = 4,
 
         PrimaryKeyForeignKey = PrimaryKey | ForeignKey,
-
-        UniqueKey = 4,
-        Indexed = 8
+        PrimaryKeyUniqueKey = PrimaryKey | UniqueKey,
+        ForeignKeyUniqueKey = ForeignKey | UniqueKey,
+        PrimaryKeyForeignKeyUniqueKey = PrimaryKey | ForeignKey | UniqueKey,
     }
 }

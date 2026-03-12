@@ -46,7 +46,7 @@ namespace MermaidDotNet.EntityFrameworkCore
             {
                 var table = tableKey.Value;
                 var foreignKeys = table.Columns
-                    .Where(c => c.ColumnKeyType == ColumnKeyType.ForeignKey)
+                    .Where(c => c.ColumnKeyType.HasFlag(ColumnKeyType.ForeignKey))
                     .ToList();
 
                 foreach (var fk in foreignKeys)
@@ -94,12 +94,9 @@ namespace MermaidDotNet.EntityFrameworkCore
 
             foreach (var property in entityType.GetProperties())
             {
-                var referenceType = (pkPropertyNames.Contains(property.Name), fkPropertyNames.Contains(property.Name)) switch
-                {
-                    (true, _) => ColumnKeyType.PrimaryKey,
-                    (_, true) => ColumnKeyType.ForeignKey,
-                    _ => ColumnKeyType.None
-                };
+                var referenceType = pkPropertyNames.Contains(property.Name) ? ColumnKeyType.PrimaryKey : ColumnKeyType.None;
+                referenceType |= fkPropertyNames.Contains(property.Name) ? ColumnKeyType.ForeignKey : ColumnKeyType.None;
+                referenceType |= property.IsUniqueIndex() ? ColumnKeyType.UniqueKey : ColumnKeyType.None;
 
                 table.Columns.Add(new DiagramColumn
                 {
@@ -119,13 +116,14 @@ namespace MermaidDotNet.EntityFrameworkCore
                 foreach (var property in owned.GetProperties()
                     .Where(p => !p.IsForeignKey() && !p.IsPrimaryKey()))
                 {
+                    var referenceType = property.IsUniqueIndex() ? ColumnKeyType.UniqueKey : ColumnKeyType.None;
                     table.Columns.Add(new DiagramColumn
                     {
                         Property = property,
                         Name = $"{navigation.Name}_{property.Name}",
                         Type = Nullable.GetUnderlyingType(property.ClrType) ?? property.ClrType,
                         IsNullable = property.IsNullable,
-                        ColumnKeyType = ColumnKeyType.None
+                        ColumnKeyType = referenceType
                     });
                 }
             }

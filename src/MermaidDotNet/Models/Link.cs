@@ -5,11 +5,11 @@ namespace MermaidDotNet.Models
 {
     public class Link
     {
-        public Link(string sourceNode, string destinationNode, string? text = null, string? linkstyle = null, bool isBidirectional = false, LinkType linkType = LinkType.Normal, ArrowType arrowType = ArrowType.Normal)
+        public Link(string sourceNode, string destinationNode, string text = "", string linkstyle = "", bool isBidirectional = false, LinkType linkType = LinkType.Normal, ArrowType arrowType = ArrowType.Normal)
         {
             SourceNode = sourceNode.Replace(" ", "");
             DestinationNode = destinationNode.Replace(" ", "");
-            Text = text;
+            Label = text;
             IsBidirectional = isBidirectional;
             LinkStyle = linkstyle;
             Type = linkType;
@@ -18,8 +18,8 @@ namespace MermaidDotNet.Models
 
         public string SourceNode { get; set; }
         public string DestinationNode { get; set; }
-        public string? Text { get; set; }
-        public string? LinkStyle { get; set; }
+        public string Label { get; set; }
+        public string LinkStyle { get; set; }
         public bool IsBidirectional { get; }
         public LinkType Type { get; set; }
         public ArrowType Arrow { get; set; }
@@ -35,9 +35,9 @@ namespace MermaidDotNet.Models
 
             sb.Append(GetLinkSymbol(Type));
 
-            if (!string.IsNullOrEmpty(Text))
+            if (!string.IsNullOrEmpty(Label))
             {
-                sb.Append(Text);
+                sb.Append(Label);
                 var linkSymbol = GetLinkSymbol(Type);
                 if (Type == LinkType.Dotted)
                 {
