@@ -24,9 +24,8 @@ namespace MermaidDotNet.Models
         public LinkType Type { get; set; }
         public ArrowType Arrow { get; set; }
 
-        public string GetLinkString()
+        public virtual string GetLinkString()
         {
-            var link = SourceNode;
             StringBuilder sb = new();
             sb.Append(SourceNode);
             if (IsBidirectional)

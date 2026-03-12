@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FC6D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet.BlazorApp", "MermaidDotNet.BlazorApp\MermaidDotNet.BlazorApp.csproj", "{60367021-B81C-406B-B8A3-2353204C2E0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MermaidDotNet.EntityFrameworkCore", "MermaidDotNet.EntityFrameworkCore\MermaidDotNet.EntityFrameworkCore.csproj", "{A8CCEEA1-B4D9-644B-21E4-A3C4042394C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

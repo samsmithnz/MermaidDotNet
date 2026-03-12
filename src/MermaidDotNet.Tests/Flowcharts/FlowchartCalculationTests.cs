@@ -1,8 +1,9 @@
+using MermaidDotNet.Diagrams;
 using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 using System.Xml.Linq;
 
-namespace MermaidDotNet.Tests;
+namespace MermaidDotNet.Tests.Flowcharts;
 
 [TestClass]
 public class FlowchartCalculationTests
@@ -593,8 +594,7 @@ public class FlowchartCalculationTests
         };
         FlowchartDiagram flowchart = new(nodes, new(), direction);
         string expected = @"flowchart RL
-    node1[This is node 1]
-";
+    node1[This is node 1]";
 
         //Act
         string result = flowchart.CalculateDiagram();

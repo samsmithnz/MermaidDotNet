@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MermaidDotNet
+namespace MermaidDotNet.Diagrams
 {
     public abstract class ADiagram
     {

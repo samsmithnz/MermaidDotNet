@@ -1,4 +1,6 @@
-namespace MermaidDotNet.Tests;
+using MermaidDotNet.Diagrams;
+
+namespace MermaidDotNet.Tests.Flowcharts;
 
 [TestClass]
 public class FlowchartTests

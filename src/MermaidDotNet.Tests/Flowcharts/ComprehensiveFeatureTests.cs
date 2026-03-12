@@ -1,7 +1,8 @@
+using MermaidDotNet.Diagrams;
 using MermaidDotNet.Enums;
 using MermaidDotNet.Models;
 
-namespace MermaidDotNet.Tests;
+namespace MermaidDotNet.Tests.Flowcharts;
 
 /// <summary>
 /// Comprehensive test to demonstrate all the new flowchart functionality added

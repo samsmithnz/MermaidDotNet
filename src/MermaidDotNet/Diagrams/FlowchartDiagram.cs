@@ -3,7 +3,7 @@ using MermaidDotNet.Extensions;
 using MermaidDotNet.Models;
 using System.Text;
 
-namespace MermaidDotNet;
+namespace MermaidDotNet.Diagrams;
 
 public class FlowchartDiagram : ADiagram
 {
